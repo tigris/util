@@ -31,7 +31,7 @@ else
     export EDITOR="vi"
 fi
 
-if [ -f "$HOME/.bash/term/$TERM"]; then
+if [ -f "$HOME/.bash/term/$TERM" ]; then
     source "$HOME/.bash/term/$TERM"
 fi
 

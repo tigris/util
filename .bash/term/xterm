@@ -1,4 +1,4 @@
 export TERM="xterm-color"
-if [ -e "$HOME/.bash/term/$TERM"]; then
+if [ -e "$HOME/.bash/term/$TERM" ]; then
     source "$HOME/.bash/term/$TERM"
 fi

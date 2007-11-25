@@ -1,1 +1,4 @@
 alias ls="ls --color=auto"
+
+# no system beeps
+setterm -blength 0
