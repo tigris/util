@@ -1,11 +1,7 @@
 if has("terminfo")
   set t_Co=16
-"  set t_Sf=<esc>[3%p1%dm
-"  set t_Sb=<esc>[4%p1%dm
 "else
 "  set t_Co=8
-"  set t_Sf=<esc>[3%dm
-"  set t_Sb=<esc>[4%dm
 endif
 
 " set up HTML specific things
@@ -154,7 +150,6 @@ endfunction
 syntax on
 filetype plugin on
 
-"set nocompatible
 set list
 set shiftwidth=4
 set tabstop=4
@@ -176,7 +171,6 @@ set showcmd
 set showmatch
 set incsearch
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
-"set term=xterm-color
 colorscheme default
 set background=dark
 
