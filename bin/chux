@@ -1,0 +1,4 @@
+#! /bin/bash
+
+find . -type f -perm /111
+find . -type f -perm /111 -print0 | xargs -0r chmod -x

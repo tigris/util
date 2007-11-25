@@ -1,0 +1,14 @@
+export PATH="$PATH:/opt/local/bin:/opt/local/sbin/:/opt/local/lib/ruby/gems/1.8/bin"
+
+alias le='less /var/log/httpd/error_log'
+alias la='less /var/log/httpd/access_log'
+alias te='tail -f /var/log/httpd/error_log'
+alias ta='tail -f /var/log/httpd/access_log'
+alias tm='tail -f /var/log/mail.log'
+alias ts='tail -f /var/log/system.log'
+
+alias vless='/usr/share/vim/vim70/macros/less.sh'
+
+alias sshr='ssh raphael.tigris.id.au'
+alias ssht='ssh tyrell.home.moto-coda.org'
+alias sshc='ssh dpearce@203.13.23.47'

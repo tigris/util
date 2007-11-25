@@ -1,0 +1,25 @@
+#! /usr/bin/perl -w
+use strict;
+
+foreach my $file (@ARGV) {
+    next unless -f $file && $file =~ /\.(wav|pcm)$/i;
+    my $new = $file;
+    my ($r, $scale, $amount) = ('', '', '');
+    if (lc($1) eq 'pcm') {
+        $r = '-r';
+        $scale = '--scale';
+        $amount = 5;
+    }
+    $new =~ s/\.(wav|pcm)$/.mp3/i;
+    system(
+        '/usr/bin/lame',
+        '-h',
+        '--vbr-new',
+        $r,
+        $scale,
+        $amount,
+        $file,
+        $new
+    ) && die('argh!');
+    unlink $file;
+}

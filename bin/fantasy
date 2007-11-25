@@ -1,0 +1,471 @@
+#! /usr/bin/perl
+
+package Player;
+use strict;
+use warnings;
+
+sub new {
+    my ($class, $data) = @_;
+    my $self =
+        ref $data
+        ? $class->_from_xml($data)
+        : $class->_from_html($data);
+    $self->{fantasy_points} = $self->_calculate_fantasy_points;
+    return $self;
+
+}
+
+sub _from_html {
+    my ($class, $html) = @_;
+
+    my $self = bless {}, $class;
+
+    ($self->{name}) = $html =~ m#class="player.">(.+?)\s*</a>#;
+    $self->{name} =~ s/&#(\d+);/chr $1/e;
+    $self->{name} =~ s/^\s*//;
+    $self->{name} =~ s/\s*$//;
+    $self->{minutes_played} = $html =~ m#<td>([\d:]+)\s*</td>#;
+    $html =~ s#.*:\d+\s*</td>##;
+    $html =~ s#<td>#|#g;
+    $html =~ s#[^\d\|\-]##g;
+    $html = q(|0-0|0-0|0-0|0|0|0|0|0|0|0|0|0) if $html =~ /\|\-?\|/;
+    my @stats = split /[\|\-]/, $html;
+    shift @stats;
+
+    for (qw(
+        field_goals_made
+        field_goals_attempted
+        three_pointers_made
+        three_pointers_attempted
+        free_throws_made
+        free_throws_attempted
+        offensive_rebounds
+        defensive_rebounds
+        rebounds
+        assists
+        personal_fouls
+        steals
+        turnovers
+        blocks
+        points
+    )) {
+        $self->{$_} = shift @stats;
+    }
+
+    return $self;
+}
+
+sub _from_xml {
+    my ($class, $xml_node) = @_;
+
+    my $name = $xml_node->getAttribute(q(name));
+    my $self = bless { name => (split /\|/, $name)[2] }, $class;
+
+    my $stats = $xml_node->getAttribute(q(stat));
+
+    ## Stats has double || before the points and some unknown stat before that.
+    $stats =~ s/\|\-?\d*\|\|(\d+)$/\|$1/;
+
+    ## If the player did not play "dnp", the stats field comes out like crap.
+    if (
+        $xml_node->getAttribute(q(dnp)) ne ''
+        or $stats =~ /^:/
+    ) {
+        $stats = q(00:00|0-0|0-0|0-0) . (q(|0) x 9);
+    }
+
+    my @stats = split /[\|\-]/, $stats;
+    for (qw(
+        minutes_played
+        field_goals_made
+        field_goals_attempted
+        three_pointers_made
+        three_pointers_attempted
+        free_throws_made
+        free_throws_attempted
+        offensive_rebounds
+        defensive_rebounds
+        rebounds
+        assists
+        personal_fouls
+        steals
+        turnovers
+        blocks
+        points
+    )) {
+        $self->{$_} = shift @stats;
+    }
+
+    ## Bang the sorting order on the end too, just for fun.
+    $self->{sort} = $xml_node->getAttribute(q(srt));
+
+    return $self;
+}
+
+for my $att (qw(
+    name
+    minutes_played
+    field_goals_made
+    field_goals_attempted
+    three_pointers_made
+    three_pointers_attempted
+    free_throws_made
+    free_throws_attempted
+    offensive_rebounds
+    defensive_rebounds
+    rebounds
+    assists
+    personal_fouls
+    steals
+    turnovers
+    blocks
+    points
+    fantasy_points
+    sort
+)) {
+    *{;no strict q(refs);\*{$att}} = sub { shift->{$att} }
+}
+
+sub _calculate_fantasy_points {
+    my $self = shift;
+    my $points = (
+        ($self->rebounds * 1.5)
+        + ($self->steals * 2.5)
+        + ($self->blocks * 2.5)
+        + ($self->assists * 2)
+        + $self->points
+        - $self->turnovers
+        - (($self->field_goals_attempted - $self->field_goals_made) / 2)
+        - ($self->free_throws_attempted - $self->free_throws_made)
+    );
+    if (
+        (
+            !!($self->rebounds > 10) +
+            !!($self->assists > 10) +
+            !!($self->points > 10) +
+            !!($self->blocks > 10) +
+            !!($self->steals > 10)
+        ) >= 3
+    ) {
+        $points += 10;
+    }
+    return $points;
+}
+
+######
+
+package Team;
+use strict;
+use warnings;
+
+sub new {
+    my ($class, $data) = @_;
+    return
+        ref $data
+        ? $class->_from_xml($data)
+        : $class->_from_html($data);
+}
+
+sub _from_html {
+    my ($class, $html) = @_;
+
+    my ($name, @players);
+
+    my $current_player;
+    for my $line (split qq(\n), $html) {
+        if ($current_player) {
+            $current_player .= $line;
+            if ($line =~ m#</tr>#) {
+                my $player = Player->new($current_player);
+                $player->{sort} = @players + 1;
+                push @players, $player;
+                undef $current_player;
+            }
+        }
+        elsif ($line =~ m#<tr height=17 valign=middle class=playerStats>#) {
+            $current_player = $line;
+        }
+        elsif ($line =~ m#class=tmTitleLink>(.+)</a>#) {
+            $name = $1;
+        }
+    }
+
+    return bless {
+        players => [ sort { $a->sort <=> $b->sort } @players ],
+        score   => do { my $x; $x += $_->points for @players; $x },
+        name    => $name,
+    }, $class;
+}
+
+sub _from_xml {
+    my ($class, $xml_node) = @_;
+
+    my @players;
+    my $player_nodes = $xml_node->getElementsByTagName(q(pl));
+    while (my $node = $player_nodes->pop) {
+        push @players, Player->new($node);
+    }
+
+    return bless {
+        players => [ sort { $a->sort <=> $b->sort } @players ],
+        score   => (split(/\|/, $xml_node->getAttribute(q(scr))))[-1],
+        name    =>
+            join(q( ), (split(/\|/, $xml_node->getAttribute(q(tm))))[2,1]),
+    }, $class;
+}
+
+sub name    { shift->{name} }
+sub score   { shift->{score} }
+sub players { @{shift->{players}} }
+
+######
+
+package Game;
+use strict;
+use warnings;
+
+sub new {
+    my ($class, $data) = @_;
+    return
+        ref $data
+        ? $class->_from_xml($data)
+        : $class->_from_html($data);
+}
+
+sub _from_html {
+    my ($class, $html) = @_;
+
+    my ($home, $away);
+    for my $line (split qq(\n), $html) {
+        next unless $away or $line =~ /-- TEAM PLAYERS --/;
+        if ($home) {
+            last if $line =~ /class=totalStats2/;
+            $home .= qq($line\n);
+        }
+        else {
+            if ($line =~ /class=totalStats2/) {
+                $home .= qq($line\n);
+            }
+            else {
+                $away .= qq($line\n);
+            }
+        }
+    }
+
+    $home = Team->new($home);
+    $away = Team->new($away);
+
+    return bless {
+        home           => $home,
+        away           => $away,
+        time_remaining => q(),
+        quarter        => defined $home->score || defined $away->score
+            ? q(FINAL)
+            : q(START),
+    }, $class;
+}
+
+sub _from_xml {
+    my ($class, $xml_node) = @_;
+    my $game = $xml_node->getElementsByTagName(q(game))->pop;
+    return bless {
+        home           => Team->new($game->getElementsByTagName(q(htm))->pop),
+        away           => Team->new($game->getElementsByTagName(q(vtm))->pop),
+        time_remaining => $game->getAttribute(q(clk)),
+        quarter        => $game->getAttribute(q(gstattxt)),
+    }, $class;
+}
+
+for my $att (qw(home away time_remaining quarter)) {
+    *{;no strict q(refs);\*{$att}} = sub { shift->{$att} }
+}
+
+######
+
+package main;
+use warnings;
+use strict;
+
+use lib '/web/home/dpearce/lib';
+
+use IO::File qw();
+use LWP::Simple qw();
+use XML::LibXML qw();
+use Getopt::Long qw(GetOptions);
+use DateTime qw();
+
+GetOptions(
+    'date=s' => \(my $date = ''),
+    'game=s' => \(my $game = ''),
+    'file=s' => \(my $file = ''),
+) || die 'Invalid usage.';
+
+if ($date) {
+    my ($y, $m, $d) = $date =~ m!(\d{4})[/-](\d\d?)[/-](\d\d?)!;
+    $date = DateTime->new(year => $y, month => $m, day => $d)
+        || die 'Invalid date string.';
+}
+else {
+    $date = DateTime->now;
+    $date->set_time_zone('America/Los_Angeles');
+}
+
+$date = $date->strftime('%Y%m%d');
+
+if ($game) {
+    my $gameObj = _game_from_url($game, $date);
+    parse_scores($gameObj);
+    parse_team($gameObj->away);
+    parse_team($gameObj->home);
+    exit 0;
+}
+
+$file = (getpwuid($<))[7] . '/.nba_fantasy' unless $file;
+
+my $userData = parse_user_data($file);
+my %knownTeams = map { $_ => 1 } values %{$userData};
+
+my $url = qq(http://www.nba.com/scores/fullScoreboard.jsp?date=$date);
+
+my $scoreboard = LWP::Simple::get($url)
+    || die qq(Could not get scoreboard: $url\n);
+
+my $obj = XML::LibXML->new->parse_string($scoreboard)
+    || die qq(Could not parse into xml:\n$scoreboard\n);
+
+$obj->getElementsByTagName(q(error))
+    && die qq(Error getting scoreboard.\n);
+
+my @links;
+my $games = $obj
+    ->getElementsByTagName(q(message))
+    ->pop
+    ->getElementsByTagName(q(game));
+while (my $game = $games->pop) {
+    push @links, $game->getAttribute(q(gcd));
+}
+
+die qq(No games to parse.\n) unless @links;
+
+my @players;
+for my $link (@links) {
+    my ($date, $away, $home) = $link =~ m!(\d+)/([A-Z]{3})([A-Z]{3})!;
+    next unless exists $knownTeams{$away} or $knownTeams{$home};
+    my $game = _game_from_url("$away$home", $date);
+    next if $game->quarter eq 'START';
+    for my $team (($game->home, $game->away)) {
+        for my $player ($team->players) {
+            next unless exists $userData->{$player->name};
+            push @players, $player;
+        }
+    }
+}
+
+if (@players) {
+    my $total = 0;
+    $total += $_->fantasy_points for @players;
+    parse_header();
+    parse_player($_) for @players;
+    parse_footer();
+    print "Total: $total\n";
+}
+else {
+    print qq(No players today.\n);
+}
+
+sub _game_from_url {
+    my ($game, $date) = @_;
+
+    my $xml_url  =
+        qq(http://www.nba.com/scores/boxscore.jsp?gamecode=$date/$game);
+    my $html_url =
+        qq(http://www.nba.com/games/$date/$game/boxscore.html);
+
+    my $page = LWP::Simple::get($xml_url)
+        || die qq(Could not get scores:\n\t$xml_url\n);
+
+    my $obj = XML::LibXML->new->parse_string($page)
+        || die qq(Could not parse into xml:\n$page\n);
+
+    if ($obj->getElementsByTagName(q(error))) {
+        $obj = LWP::Simple::get($html_url)
+            || die qq(Could not get scores:\n\t$html_url\n);
+    }
+
+    return Game->new($obj);
+}
+
+exit 0;
+
+################################################################################
+
+sub parse_team {
+    my $team = shift;
+
+    printf qq(%s\n%s\n), $team->name, q(=) x length $team->name;
+
+    ## All this printf is shit, there must be some kind of nice table printing
+    ## mechanism in perl?
+
+    parse_header();
+    for ($team->players) {
+        parse_player($_);
+    }
+    parse_footer();
+    return 1;
+}
+
+sub parse_header {
+    print qq(+------------------------+-------+-------+----+----+----+----+----+-----+------+\n);
+    print qq(|        PLAYER          |  FG   |   FT  | RB | AS | ST | TO | BL | PTS |  FP  |\n);
+    print qq(+------------------------+-------+-------+----+----+----+----+----+-----+------+\n);
+    return 1;
+}
+
+sub parse_footer {
+    print qq(+------------------------+-------+-------+----+----+----+----+----+-----+------+\n);
+    return 1;
+}
+
+sub parse_player {
+    my $player = shift;
+    printf
+        qq(| %-22s | %2d-%-2s | %2d-%-2s | %2d | %2d | %2d | %2d | %2d | %3d | %4.1f |\n),
+        substr($player->name, 0, 22),
+        $player->field_goals_made,
+        $player->field_goals_attempted,
+        $player->free_throws_made,
+        $player->free_throws_attempted,
+        $player->rebounds,
+        $player->assists,
+        $player->steals,
+        $player->turnovers,
+        $player->blocks,
+        $player->points,
+        $player->fantasy_points;
+    return;
+}
+
+sub parse_scores {
+    my $game = shift;
+    print join q( ), $game->quarter(q(gstattxt)), $game->time_remaining(q(clk));
+    print $/;
+    print join q(: ), $_->name, $_->score . $/ for ($game->away, $game->home);
+    print $/;
+}
+
+sub parse_user_data {
+    my $file = shift;
+    my $io = IO::File->new($file, 'r')
+        || die qq(Error opening your .nba_fantasy file);
+
+    my %stuff;
+    while (<$io>) {
+        chomp;
+        warn "Invalid line: $_\n" unless m/^([A-Z]{3}) (.+)$/;
+        my ($team, $player) = ($1, $2);
+        $stuff{$player} = $team;
+    }
+
+    return \%stuff;
+}

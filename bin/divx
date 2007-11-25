@@ -1,0 +1,172 @@
+#! /usr/bin/perl -w
+use strict;
+use Getopt::Long(qw(GetOptions));
+
+sub usage();
+
+my %opt = (
+    avi               => undef,
+    crop              => undef,
+    discs             => 1,
+    bitrate           => undef,
+    vpass             => 2,
+    codec             => 'divx',
+    aid               => undef,
+    sid               => undef,
+    mencoder          => '/usr/bin/mencoder',
+    cropdetect_length => '10',
+    cropdetect_pos    => '00:19:00',
+    vol               => 5,
+    verbose           => 0,
+    expand            => undef,
+    commands          => 0,
+);
+
+GetOptions(
+    'avi=s'               => \$opt{avi},
+    'crop=s'              => \$opt{crop},
+    'discs=i'             => \$opt{discs},
+    'bitrate=i'           => \$opt{bitrate},
+    'vpass=i'             => \$opt{vpass},
+    'codec=s'             => \$opt{codec},
+    'aid=i'               => \$opt{aid},
+    'sid=i'               => \$opt{sid},
+    'mencoder=s'          => \$opt{mencoder},
+    'cropdetect_length=i' => \$opt{cropdetect_length},
+    'cropdetect_pos=s'    => \$opt{cropdetect_pos},
+    'vol=s'               => \$opt{vol},
+    'verbose!'            => \$opt{verbose},
+    'expand=s'            => \$opt{expand},
+    'commands-only'       => \$opt{commands},
+) || usage();
+
+$opt{vob} = shift || usage();
+
+if (-e 'frameno.avi') {
+    die 'Usage of frameno.avi is not recommended';
+}
+
+unless (defined $opt{avi}) {
+    $opt{avi} = $opt{vob};
+    $opt{avi} =~ s/\.(?:vob|mpe?g)$/.avi/i;
+}
+
+unless (defined $opt{bitrate}) {
+    print "Calculating bitrate... (can take a while)\n" if $opt{verbose};
+    ## calculate length
+    my $length;
+    for (my $pos = 7200; $pos; $pos -= 60) {
+        my @data = `$opt{mencoder} -oac copy -ovc copy -o /dev/null -ss $pos "$opt{vob}" 2>/dev/null | grep 'Video stream'`;
+        ($length) = $data[0] =~ /(\d+)\.\d+ secs/;
+        if ($length) {
+            $length += $pos;
+            last;
+        }
+    }
+    unless ($length) {
+        die 'Could not find the length of the movie in order to calculate bitrate';
+    }
+    print "Detected movie length: $length seconds\n" if $opt{verbose};
+
+    ## calculate bitrate
+                      # 700 MB * DISCS - LENGTH * MP3 BITRATE (192) / LENGTH * 8
+    my $bitrate = int((((700_000 * $opt{discs}) - ($length * 24)) / $length) * 8);
+    print "Using bitrate: $bitrate\n" if $opt{verbose};
+    $opt{bitrate} = $opt{codec} eq 'xvid' ? "bitrate=$bitrate" : "vbitrate=$bitrate";
+}
+
+$opt{vpass} = $opt{vpass} == 2 ? 1 : 0;
+my $vidopts = $opt{codec} eq 'xvid' ? '-xvidencopts' : '-lavcopts';
+my $pass    = $opt{codec} eq 'xvid' ? 'pass'         : 'vpass';
+
+unless (defined $opt{crop}) {
+    my $cmd = join(' ',
+        $opt{mencoder},
+        '-nosound',
+        '-oac', 'copy',
+        '-ovc', 'lavc',
+        '-lavcopts', 'vcodec=mpeg4',
+        '-o', '/dev/null',
+        '-endpos', $opt{cropdetect_length},
+        '-ss', $opt{cropdetect_pos},
+        '-vf', 'cropdetect=24:scale',
+        '-zoom', '-xy', 640,
+        qq("$opt{vob}"), '2>/dev/null',
+    );
+    my @data = `$cmd`;
+    ($opt{crop}) = $data[-9] =~ /(crop=\d+:\d+:\d+:\d+)/;
+    defined $opt{crop} ||
+        die("@data\n\nError getting crop data. Command was: $cmd\n");
+}
+print "Using crop: $opt{crop}\n" if $opt{verbose};
+
+my @crop_opts = $opt{crop} ? ('-vf-add', $opt{crop}) : ();
+my @expand_opts = defined $opt{expand} ? ('-vf-add', $opt{expand}) : ();
+my @sid_opts = defined $opt{sid} ? ('-sid', $opt{sid}, '-subalign', 2) : ();
+
+my @mencoder_opts = (
+        $opt{mencoder},
+        '-oac', 'mp3lame',
+        '-lameopts', 'vbr=2:vol=' . $opt{vol},
+        @crop_opts,
+        @expand_opts,
+        @sid_opts,
+        '-vf-add', 'scale',
+        '-zoom',
+        '-xy', '640',
+        $opt{codec} eq 'divx' ? ('-ffourcc', 'divx') : (),
+        '-ovc', $opt{codec} eq 'xvid' ? 'xvid' : 'lavc',
+);
+
+if ($opt{vpass} && !-e 'divx2pass.log') {
+    push @mencoder_opts, ($vidopts, "$pass=1");
+    if ($opt{commands}) {
+        print join(' ', @mencoder_opts, '-nosound', '-o', '/dev/null', qq("$opt{vob}")),
+            "\n";
+    } else {
+        system(@mencoder_opts, '-nosound', '-o', '/dev/null', $opt{vob})
+            && die("Error running first pass!");
+    }
+    pop @mencoder_opts;
+    pop @mencoder_opts;
+}
+
+my $opts = join(':',
+    $opt{codec} eq 'divx' ? ('vcodec=mpeg4') : (),
+    $opt{vpass}           ? ("$pass=2")      : (),
+    $opt{bitrate}         ? ($opt{bitrate})  : (),
+);
+
+push @mencoder_opts, ($vidopts, $opts);
+
+if ($opt{commands}) {
+    print join(' ', @mencoder_opts, '-o', qq("$opt{avi}"), qq("$opt{vob}")), "\n";
+} else {
+    system(@mencoder_opts, '-o', $opt{avi}, $opt{vob})
+        && die("Error running second pass!");
+}
+
+exit 0;
+
+sub usage()
+{
+    die(<<END);
+Usage: $0 [OPTIONS] Blah.vob
+
+Converts a vob to a divx
+
+  --bitrate x (0 for maximum bitrate)
+  --crop crop=h:w:x:y (0 for no cropping)
+  --cropdetect_length 10 (seconds)
+  --cropdetect_pos 00:19:00 (19 minute mark)
+  --avi Blah.avi (default is the same as the .vob)
+  --vpass 2 (anything other than 2 means single pass, default is 2)
+  --vol 7 (audio scale)
+  --aid 128 (audio track to use)
+  --mencoder /usr/bin/mencoder
+  --quiet
+  --commands-only Only print the commands that would be done.
+END
+}
+
+__END__
