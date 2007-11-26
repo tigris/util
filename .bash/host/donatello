@@ -12,3 +12,6 @@ alias vless='/usr/share/vim/vim70/macros/less.sh'
 alias sshr='ssh raphael.tigris.id.au'
 alias ssht='ssh tyrell.home.moto-coda.org'
 alias sshc='ssh dpearce@203.13.23.47'
+
+alias mysql='mysql5'
+alias mysqladmin='mysqladmin5'
