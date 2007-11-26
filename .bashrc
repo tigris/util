@@ -2,7 +2,6 @@ if [ -f "/etc/bash.bashrc" ]; then
     source "/etc/bash.bashrc"
 fi
 
-export PATH="$HOME/bin:$PATH"
 export BASH_ENV="$HOME/.bashrc"
 export PAGER="less"
 export CVS_RSH="ssh"
@@ -49,3 +48,5 @@ if [ -f "$HOME/.oldpwd" ]; then
     cd `cat "$HOME/.oldpwd"`
     rm "$HOME/.oldpwd"
 fi
+
+export PATH="$HOME/bin:$PATH"

@@ -1,4 +1,4 @@
-export PATH="$PATH:/usr/local/bin:/var/lib/gems/1.8/bin"
+export PATH="/usr/local/bin:/var/lib/gems/1.8/bin:$PATH"
 
 alias le='less /var/log/apache2/error.log'
 alias la='less /var/log/httpd/access.log'
