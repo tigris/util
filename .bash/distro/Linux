@@ -1,4 +1,6 @@
 alias ls="ls --color=auto"
 
 # no system beeps
-setterm -blength 0
+if [ "x$TERM" != "x" ]; then
+    setterm -blength 0
+fi
