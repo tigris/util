@@ -28,7 +28,7 @@ sub _from_html {
     $html =~ s#.*:\d+\s*</td>##;
     $html =~ s#<td>#|#g;
     $html =~ s#[^\d\|\-]##g;
-    $html = q(|0-0|0-0|0-0|0|0|0|0|0|0|0|0|0) if $html =~ /\|\-?\|/;
+    $html = q(|0-0|0-0|0-0|0|0|0|0|0|0|0|0|0|0|0) if $html =~ /\|\-?\|/;
     my @stats = split /[\|\-]/, $html;
     shift @stats;
 
@@ -39,6 +39,13 @@ sub _from_html {
         three_pointers_attempted
         free_throws_made
         free_throws_attempted
+    )) {
+        $self->{$_} = shift @stats;
+    }
+    $self->{lenavo_stats} = shift @stats;
+    $self->{lenavo_stats} = shift @stats
+        unless defined $self->{lenavo_stats} and length $self->{lenavo_stats};
+    for (qw(
         offensive_rebounds
         defensive_rebounds
         rebounds
@@ -47,6 +54,7 @@ sub _from_html {
         steals
         turnovers
         blocks
+        blocks_against
         points
     )) {
         $self->{$_} = shift @stats;
@@ -64,7 +72,7 @@ sub _from_xml {
     my $stats = $xml_node->getAttribute(q(stat));
 
     ## Stats has double || before the points and some unknown stat before that.
-    $stats =~ s/\|\-?\d*\|\|(\d+)/\|$1/;
+    $stats =~ s/\|\-?\d*\|\|(\d+)(\||$)/\|$1$2/;
 
     ## If the player did not play "dnp", the stats field comes out like crap.
     if (
@@ -135,7 +143,7 @@ sub _calculate_fantasy_points {
         + $self->points
         - $self->turnovers
         - (($self->field_goals_attempted - $self->field_goals_made) / 2)
-        - ($self->free_throws_attempted - $self->free_throws_made)
+        - (($self->free_throws_attempted - $self->free_throws_made) / 2)
     );
     if (
         (
