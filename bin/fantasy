@@ -64,7 +64,7 @@ sub _from_xml {
     my $stats = $xml_node->getAttribute(q(stat));
 
     ## Stats has double || before the points and some unknown stat before that.
-    $stats =~ s/\|\-?\d*\|\|(\d+)$/\|$1/;
+    $stats =~ s/\|\-?\d*\|\|(\d+)/\|$1/;
 
     ## If the player did not play "dnp", the stats field comes out like crap.
     if (
@@ -73,7 +73,6 @@ sub _from_xml {
     ) {
         $stats = q(00:00|0-0|0-0|0-0) . (q(|0) x 9);
     }
-
     my @stats = split /[\|\-]/, $stats;
     for (qw(
         minutes_played
