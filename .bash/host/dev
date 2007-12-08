@@ -1,0 +1,3 @@
+alias vless='/usr/share/vim/vim70/macros/less.sh'
+alias te='tail -f /var/log/apache2/error_log'
+alias ta='tail -f /var/log/apache2/access_log'

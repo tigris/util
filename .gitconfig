@@ -1,0 +1,11 @@
+[user]
+	email = git@tigris.id.au
+	name = Danial Pearce
+[alias]
+	ci = commit
+	st = status
+	co = checkout
+[color]
+	status = auto
+	diff = auto
+	branch = auto
