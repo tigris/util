@@ -1,15 +1,15 @@
 export PATH="/usr/local/bin:/var/lib/gems/1.8/bin:$PATH"
 
 alias le='less /var/log/apache2/error.log'
-alias la='less /var/log/httpd/access.log'
-alias te='tail -f /var/log/httpd/error.log'
-alias ta='tail -f /var/log/httpd/access.log'
+alias la='less /var/log/apache2/access.log'
+alias te='tail -f /var/log/apache2/error.log'
+alias ta='tail -f /var/log/apache2/access.log'
 alias tm='tail -f /var/log/mail.log'
-alias ts='tail -f /var/log/system.log'
+alias ts='tail -f /var/log/syslog'
 
 alias vless='/usr/share/vim/vim71/macros/less.sh'
 
 alias sshd='ssh donatello.tigris.id.au'
 alias ssht='ssh tyrell.home.moto-coda.org'
 alias sshc='ssh dpearce@203.13.23.47'
-alias sshd='ssh dev.office.statelesssytems.com'
+alias sshd='ssh dev.office.statelesssystems.com'
