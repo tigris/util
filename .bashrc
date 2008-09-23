@@ -5,6 +5,7 @@ fi
 export BASH_ENV="$HOME/.bashrc"
 export PAGER="less"
 export CVS_RSH="ssh"
+export RUBYOPT=rubygems
 
 unset MAIL
 unset MAILCHECK
