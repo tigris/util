@@ -3,6 +3,7 @@ export LSCOLORS="ExGxcxdxCxbxCxCxExEx"
 
 export PATH="/opt/local/bin:/opt/local/sbin/:/opt/local/lib/ruby/gems/1.8/bin:$PATH"
 export MANPATH="/opt/local/man:$MANPATH"
+export GEM_PATH='/opt/local/lib/ruby/gems/1.8'
 
 alias le='less /var/log/httpd/error_log'
 alias la='less /var/log/httpd/access_log'
