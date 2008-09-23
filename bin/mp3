@@ -26,6 +26,7 @@ foreach my $file (@ARGV) {
         $lame,
         '-h',
         '--vbr-new',
+        '--resample', '44.1',
         $r,
         $scale,
         $amount,
