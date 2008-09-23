@@ -147,11 +147,11 @@ sub _calculate_fantasy_points {
     );
     if (
         (
-            !!($self->rebounds > 10) +
-            !!($self->assists > 10) +
-            !!($self->points > 10) +
-            !!($self->blocks > 10) +
-            !!($self->steals > 10)
+            !!($self->rebounds >= 10) +
+            !!($self->assists >= 10) +
+            !!($self->points >= 10) +
+            !!($self->blocks >= 10) +
+            !!($self->steals >= 10)
         ) >= 3
     ) {
         $points += 10;

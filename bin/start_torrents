@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use LWP::UserAgent;
+
+my $server = 'http://torrentflux.tigris.id.au/';
+my $resume_page = 'dispatcher.php?action=bulkResume';
+my $login_page = 'login.php';
+my $username = 'danial';
+my $password = 'ietrinet';
+
+my $ua = LWP::UserAgent->new;
+$ua->cookie_jar({});
+$ua->post("$server$login_page", [ username => $username, iamhim => $password ]);
+$ua->get("$server$resume_page");
