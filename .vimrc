@@ -7,8 +7,8 @@ endif
 " set up HTML specific things
 function SetSpacings()
   if (&filetype == "perl")
-    set shiftwidth=4
-    set tabstop=4
+    set shiftwidth=2
+    set tabstop=2
   elseif (&filetype == "html")
     set shiftwidth=2
     set tabstop=2
@@ -178,15 +178,13 @@ autocmd BufNewFile,BufRead,BufEnter *.tmpl set filetype=html
 autocmd BufNewFile,BufRead,BufEnter *.inc set filetype=html
 autocmd BufNewFile,BufRead,BufEnter *.chtml set filetype=html
 autocmd BufNewFile,BufRead,BufEnter *.schtml set filetype=html
-autocmd BufNewFile,BufRead,BufEnter *.erb set filetype=html
+autocmd BufNewFile,BufRead,BufEnter *.html.erb set filetype=html
 
 autocmd BufNewFile,BufRead,BufEnter *funcs-rsearch/* set filetype=perl
 autocmd BufNewFile,BufRead,BufEnter */t/*.t set filetype=perl
 
 autocmd BufNewFile,BufRead,BufEnter * call SetSpacings()
 autocmd BufNewFile,BufRead,BufEnter * call SetMappings()
-
-autocmd BufNewFile,BufRead,BufEnter *funcs-rsearch/* call SetRSearchShit()
 
 " escape is too far from home keys
 imap ;; <esc>
@@ -204,6 +202,7 @@ map ,tc :!perl -cT %<cr>
 map ,tp :!perl -T %<cr>
 map ,c :!perl -c -I . -I ./lib -I ../lib %<cr>
 map ,p :!perl -I . -I ./lib -I ../lib %<cr>
+map ,r :!ruby %<cr>
 map ,mtt :!mysql --defaults-file=~/toolbox/mysql/configs/devdb.cnf -t Toolbox < %<cr>
 map ,mte :!mysql --defaults-file=~/toolbox/mysql/configs/devdb.cnf -E Toolbox < %<cr>
 map ,mrt :!mysql --defaults-file=~/toolbox/mysql/configs/devdb.cnf -t RealEstate < %<cr>
@@ -221,3 +220,4 @@ vnoremap p <esc>:let current_reg = @"<cr>gvdi<c-r>=current_reg<cr><esc>
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
 set encoding=utf-8
+set title
