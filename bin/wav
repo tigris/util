@@ -1,0 +1,28 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+use File::Spec::Functions qw(catfile catdir rootdir);
+use List::Util qw(first);
+
+my $ffmpeg =
+    first { -x $_ }
+    map { catfile($_, 'ffmpeg') } (
+        catdir(rootdir(), qw(usr bin)),
+        catdir(rootdir(), qw(opt local bin))
+    );
+
+foreach my $file (@ARGV) {
+    next unless -f $file && $file =~ /\.ac3$/i;
+    my $new = $file;
+    my ($r, $scale, $amount) = ('', '', '');
+    $new =~ s/\.ac3$/.wav/i;
+    system(
+        $ffmpeg,
+        '-i',
+        $file,
+        '-vn',
+        $new
+    ) && die('argh!');
+    unlink $file;
+}
