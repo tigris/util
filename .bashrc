@@ -3,7 +3,7 @@ if [ -f "/etc/bash.bashrc" ]; then
 fi
 
 export BASH_ENV="$HOME/.bashrc"
-export PAGER="less"
+export PAGER="less -iX"
 export CVS_RSH="ssh"
 export RUBYOPT=rubygems
 
@@ -19,6 +19,7 @@ alias dc='cd' # I never could figure out that shit calculator anyway
 
 alias rgrep='grep -r'
 alias diff='diff -u'
+alias less='less -iX' # don't use .lesskey, it screws your git paging/coloring!
 
 alias dmp='vim ~/junk/dmp.pl'
 alias golf='vim ~/junk/golf.pl'
