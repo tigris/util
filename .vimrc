@@ -173,6 +173,8 @@ set incsearch
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 colorscheme default
 set background=dark
+set wildmenu
+set wildmode=list
 
 autocmd BufNewFile,BufRead,BufEnter *.tmpl set filetype=html
 autocmd BufNewFile,BufRead,BufEnter *.inc set filetype=html
