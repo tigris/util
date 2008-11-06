@@ -12,3 +12,6 @@
   branch = auto
   pager = true
   log = auto
+[github]
+  user = tigris
+  token = a81ee875527a750c8972387100ee865e
