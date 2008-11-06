@@ -21,8 +21,8 @@ alias rgrep='grep -r'
 alias diff='diff -u'
 alias less='less -iX' # don't use .lesskey, it screws your git paging/coloring!
 
-alias dmp='vim ~/junk/dmp.pl'
-alias golf='vim ~/junk/golf.pl'
+alias dmp='vim ~/junk/dmp'
+alias golf='vim ~/junk/golf'
 alias sql='vim ~/junk/dmp.sql'
 
 if [ `which vim` ]; then
