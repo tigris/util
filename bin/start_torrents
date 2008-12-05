@@ -6,8 +6,8 @@ use LWP::UserAgent;
 my $server = 'http://torrentflux.tigris.id.au/';
 my $resume_page = 'dispatcher.php?action=bulkResume';
 my $login_page = 'login.php';
-my $username = 'danial';
-my $password = 'ietrinet';
+my $username = 'webuser';
+my $password = 'webuser';
 
 my $ua = LWP::UserAgent->new;
 $ua->cookie_jar({});
