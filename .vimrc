@@ -185,6 +185,8 @@ autocmd BufNewFile,BufRead,BufEnter *.html.erb set filetype=html
 autocmd BufNewFile,BufRead,BufEnter *funcs-rsearch/* set filetype=perl
 autocmd BufNewFile,BufRead,BufEnter */t/*.t set filetype=perl
 
+autocmd BufNewFile,BufRead,BufEnter *.thor set filetype=ruby
+
 autocmd BufNewFile,BufRead,BufEnter * call SetSpacings()
 autocmd BufNewFile,BufRead,BufEnter * call SetMappings()
 
