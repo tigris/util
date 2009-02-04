@@ -5,12 +5,14 @@ export PATH="/opt/local/bin:/opt/local/sbin/:/opt/local/lib/ruby/gems/1.8/bin:$P
 export MANPATH="/opt/local/man:$MANPATH"
 export GEM_PATH='/opt/local/lib/ruby/gems/1.8'
 
-alias le='less /var/log/httpd/error_log'
-alias la='less /var/log/httpd/access_log'
-alias te='tail -f /var/log/httpd/error_log'
-alias ta='tail -f /var/log/httpd/access_log'
+alias le='less /var/log/apache2/error_log'
+alias la='less /var/log/apache2/access_log'
+alias te='tail -f /var/log/apache2/error_log'
+alias ta='tail -f /var/log/apache2/access_log'
 alias tm='tail -f /var/log/mail.log'
 alias ts='tail -f /var/log/system.log'
 
 alias mysql='mysql5'
 alias mysqladmin='mysqladmin5'
+
+alias vless='/usr/share/vim/vim70/macros/less.sh'

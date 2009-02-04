@@ -1,0 +1,17 @@
+#!/bin/sh
+bname=`basename $1`
+mkvinfo "$1" | grep -i track
+echo "Which track is video? (generally 1 or 2)"
+read vidtrack
+echo "Which track is audio? (generally 1 or 2)"
+read audtrack
+echo "What is the video frames per second (fps)?"
+read vidfps
+mkvextract tracks $1 ${vidtrack}:video.h264 ${audtrack}:audio.ac3
+xxd -g4 video.h264 | sed '0,/RE/s/67640033/67640029/' | xxd -r > video2.h264
+mv video2.h264 video.h264
+mkfifo audiodump.wav
+neroAacEnc -ignorelength -q 0.20 -if audiodump.wav -of audio.m4a & mplayer audio.ac3 -vc null -vo null -ao pcm:fast
+rm audiodump.wav
+MP4Box -fps $vidfps -add video.h264 -add audio.m4a ${bname}.mp4
+rm audio.m4a audio.ac3 video.h264

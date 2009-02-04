@@ -1,5 +1,15 @@
 alias ls="ls --color=auto"
 
+alias le='less /var/log/apache2/error.log'
+alias la='less /var/log/apache2/access.log'
+alias te='tail -f /var/log/apache2/error.log'
+alias ta='tail -f /var/log/apache2/access.log'
+alias tm='tail -f /var/log/mail.log'
+alias ts='tail -f /var/log/syslog'
+
+alias vless='/usr/share/vim/vim71/macros/less.sh'
+
+
 # no system beeps
 if [ "$TERM" -a "x$TERM" != "xdumb" ]; then
     setterm -blength 0
