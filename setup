@@ -1,8 +1,20 @@
 #!/bin/sh
 
+OLDPWD=`pwd`
+
 ln -sf ~/git/util/.bash ~
 ln -sf ~/git/util/.bashrc ~
 ln -sf ~/git/util/.bash_profile ~
 ln -sf ~/git/util/.bash_logout ~
 ln -sf ~/git/util/.vimrc ~
 ln -sf ~/git/util/bin ~
+
+if [ ! -d "$HOME/git/util-private" ]; then
+    cd ~/git
+    git clone git+ssh://danial@raphael.tigris.id.au/home/danial/git/util-private
+fi
+cd ~/git/util-private
+git pull
+./setup
+
+cd $OLDPWD
