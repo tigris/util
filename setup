@@ -1,9 +1,8 @@
 #!/bin/sh
 
-ln -s ~/git/util/.bash ~
-ln -s ~/git/util/.bashrc ~
-ln -s ~/git/util/.bash_profile ~
-ln -s ~/git/util/.bash_logout ~
-ln -s ~/git/util/.vimrc ~
-ln -s ~/git/util/.gitconfig ~
-ln -s ~/git/util/bin ~
+ln -sf ~/git/util/.bash ~
+ln -sf ~/git/util/.bashrc ~
+ln -sf ~/git/util/.bash_profile ~
+ln -sf ~/git/util/.bash_logout ~
+ln -sf ~/git/util/.vimrc ~
+ln -sf ~/git/util/bin ~
