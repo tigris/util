@@ -1,9 +1,16 @@
 umask 002
 set -o ignoreeof
 
-parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
+print_git_branch() {
+  BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  CLEAN=`git status 2> /dev/null | grep 'nothing to commit (working directory clean)'`
+  if [ ! -z "$BRANCH" ]; then
+    echo -n "[$BRANCH]"
+    if [ -z "$CLEAN" ]; then
+      echo -n '*'
+    fi
+  fi
 }
 
-export PS1='\[\e[0;33m\][$(date +%H:%M:%S)] \[\e[0;32m\]$(pwd) \[\e[0;35m\]$(parse_git_branch)\n\[\e[0;31m\]\u\[\e[0;39m\]@\[\e[0;31m\]\h\[\e[0;39m\]$ '
+export PS1='\[\e[0;33m\][$(date +%H:%M:%S)] \[\e[0;32m\]$(pwd) \[\e[0;35m\]$(print_git_branch)\n\[\e[0;31m\]\u\[\e[0;39m\]@\[\e[0;31m\]\h\[\e[0;39m\]$ '
 export PROMPT_COMMAND='echo -ne "\033]0;${LOGNAME}@${HOSTNAME}: ${PWD}\007"'
