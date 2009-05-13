@@ -2,9 +2,9 @@ umask 002
 set -o ignoreeof
 
 print_git_branch() {
-  BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-  CHANGED=`git status 2> /dev/null | grep 'use "git' | sed -e 's/.*/*/'`
-  echo "[$BRANCH]$CHANGED"
+  BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'`
+  CHANGED=`git status 2> /dev/null | grep 'use "git' | head -n1 | sed -e 's/.*/*/'`
+  echo "$BRANCH$CHANGED"
 }
 
 export PS1='\[\e[0;33m\][$(date +%H:%M:%S)] \[\e[0;32m\]$(pwd) \[\e[0;35m\]$(print_git_branch)\n\[\e[0;31m\]\u\[\e[0;39m\]@\[\e[0;31m\]\h\[\e[0;39m\]$ '
