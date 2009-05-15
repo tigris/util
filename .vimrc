@@ -21,8 +21,8 @@ function SetSpacings()
   endif
 endfunction
 
-function SetRSearchShit()
-  ab dumper use XXX; XXX::DUMPER();<esc>hi
+function GitBlame() range
+  execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
 endfunction
 
 function SetMappings()
@@ -201,22 +201,13 @@ map ,5 :call ToggleBackground()<cr>
 map ,6 :call ToggleHLSearch()<cr>
 map ,7 :call ToggleSyntax()<cr>
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+map ,a :call GitBlame()<cr>
 map ,s :!ispell %<cr>
 map ,tc :!perl -cT %<cr>
 map ,tp :!perl -T %<cr>
 map ,c :!perl -c -I . -I ./lib -I ../lib %<cr>
 map ,p :!perl -I . -I ./lib -I ../lib %<cr>
 map ,r :!ruby %<cr>
-map ,mtt :!mysql --defaults-file=~/toolbox/mysql/configs/devdb.cnf -t Toolbox < %<cr>
-map ,mte :!mysql --defaults-file=~/toolbox/mysql/configs/devdb.cnf -E Toolbox < %<cr>
-map ,mrt :!mysql --defaults-file=~/toolbox/mysql/configs/devdb.cnf -t RealEstate < %<cr>
-map ,mre :!mysql --defaults-file=~/toolbox/mysql/configs/devdb.cnf -E RealEstate < %<cr>
-map ,mpt :!mysql --defaults-file=~/toolbox/mysql/configs/devdb.cnf -t PSeekerTest < %<cr>
-map ,mpe :!mysql --defaults-file=~/toolbox/mysql/configs/devdb.cnf -E PSeekerTest < %<cr>
-map ,mRt :!mysql --defaults-file=~/toolbox/mysql/configs/readb.cnf -t RealEstate < %<cr>
-map ,mRe :!mysql --defaults-file=~/toolbox/mysql/configs/readb.cnf -E RealEstate < %<cr>
-map ,mPt :!mysql --defaults-file=~/toolbox/mysql/configs/pseekerdb.cnf -t PSeeker < %<cr>
-map ,mPe :!mysql --defaults-file=~/toolbox/mysql/configs/pseekerdb.cnf -E PSeeker < %<cr>
 map ,n :call ToggleLineNumbers()<cr>
 map [[ :call FindSub("Wb")<cr>
 map ]] :call FindSub("W")<cr>
