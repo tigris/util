@@ -51,4 +51,4 @@ if [ -f "$HOME/.oldpwd" ]; then
     rm "$HOME/.oldpwd"
 fi
 
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.gem/ruby/1.8/bin:$PATH"

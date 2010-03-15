@@ -7,7 +7,7 @@ alias ta='tail -f /var/log/apache2/access.log'
 alias tm='tail -f /var/log/mail.log'
 alias ts='tail -f /var/log/syslog'
 
-alias vless='/usr/share/vim/vim71/macros/less.sh'
+alias vless='/usr/share/vim/vim72/macros/less.sh'
 
 
 # no system beeps
