@@ -19,7 +19,7 @@ alias dc='cd' # I never could figure out that shit calculator anyway
 
 alias rgrep='grep -r'
 alias diff='diff -u'
-alias less='less -iX' # don't use .lesskey, it screws your git paging/coloring!
+alias less='less -RiX' # don't use .lesskey, it screws your git paging/coloring!
 
 alias dmp='vim ~/junk/dmp'
 alias golf='vim ~/junk/golf'
