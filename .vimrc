@@ -156,7 +156,7 @@ set tabstop=4
 set expandtab
 set ignorecase
 set hlsearch
-set formatoptions=crqt
+set formatoptions=crqtl
 set listchars=tab:>.,trail:_
 set autoindent
 set textwidth=80
