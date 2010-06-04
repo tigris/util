@@ -7,7 +7,7 @@ sub usage();
 my %opt = (
     avi               => undef,
     crop              => undef,
-    discs             => 1,
+    discs             => '1.0',
     bitrate           => undef,
     vpass             => 2,
     codec             => 'divx',
@@ -25,7 +25,7 @@ my %opt = (
 GetOptions(
     'avi=s'               => \$opt{avi},
     'crop=s'              => \$opt{crop},
-    'discs=i'             => \$opt{discs},
+    'discs=f'             => \$opt{discs},
     'bitrate=i'           => \$opt{bitrate},
     'vpass=i'             => \$opt{vpass},
     'codec=s'             => \$opt{codec},
@@ -69,7 +69,7 @@ unless (defined $opt{bitrate}) {
     print "Detected movie length: $length seconds\n" if $opt{verbose};
 
     ## calculate bitrate
-                      # 700 MB * DISCS - LENGTH * MP3 BITRATE (192) / LENGTH * 8
+    # 700 MB * DISCS - LENGTH * MP3 BITRATE (192) / LENGTH * 8
     my $bitrate = int((((700_000 * $opt{discs}) - ($length * 24)) / $length) * 8);
     print "Using bitrate: $bitrate\n" if $opt{verbose};
     $opt{bitrate} = $opt{codec} eq 'xvid' ? "bitrate=$bitrate" : "vbitrate=$bitrate";
