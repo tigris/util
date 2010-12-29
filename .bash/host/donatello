@@ -1,3 +1,3 @@
-alias sshr='ssh raphael.tigris.id.au'
-alias ssht='ssh tyrell.home.moto-coda.org'
+alias sshr='ssh raphael.home.tigris.id.au'
+alias ssht='ssh tigris.id.au'
 alias sshd='ssh dev.office.statelesssystems.com'
