@@ -1,6 +1,0 @@
-#!/bin/sh
-
-MSG=`git log -1 --pretty='format:%s %b' | perl -ne 's/\n/ /g; print'`
-REPO=`pwd | sed 's/.*\///'`
-
-wget --quiet --no-http-keep-alive --output-document - --post-data "user=3F4BX&workingon=$REPO: $MSG" http://72.47.208.212/workingon/index.php > /dev/null
