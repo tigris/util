@@ -2,9 +2,12 @@
 
 NAME=$1
 
-vboxmanage createvm --name $NAME --ostype Ubuntu_64 --register
-vboxmanage createhd --filename $NAME --size 8192 --register
+mkdir -p /home/danial/.VirtualBox/HardDisks
+mkdir -p /home/danial/.VirtualBox/Machines
+vboxmanage createhd --filename /home/danial/.VirtualBox/HardDisks/$NAME --size 8192
+vboxmanage createvm --basefolder /home/danial/.VirtualBox/Machines --name $NAME --ostype Ubuntu_64 --register
 vboxmanage modifyvm $NAME --nic1 bridged
+vboxmanage modifyvm dev --bridgeadapter1 eth0
 vboxmanage modifyvm $NAME --audio none
 vboxmanage modifyvm $NAME --usb off
 vboxmanage storagectl $NAME --name "Sata Controller" --add sata --controller IntelAHCI --sataportcount 2
