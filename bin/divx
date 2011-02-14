@@ -7,7 +7,7 @@ sub usage();
 my %opt = (
     avi               => undef,
     crop              => undef,
-    discs             => 1,
+    discs             => '1.0',
     bitrate           => undef,
     vpass             => 2,
     codec             => 'divx',
@@ -20,12 +20,14 @@ my %opt = (
     verbose           => 0,
     expand            => undef,
     commands          => 0,
+    scale             => 640,
+    quiet             => 0,
 );
 
 GetOptions(
     'avi=s'               => \$opt{avi},
     'crop=s'              => \$opt{crop},
-    'discs=i'             => \$opt{discs},
+    'discs=f'             => \$opt{discs},
     'bitrate=i'           => \$opt{bitrate},
     'vpass=i'             => \$opt{vpass},
     'codec=s'             => \$opt{codec},
@@ -36,8 +38,10 @@ GetOptions(
     'cropdetect_pos=s'    => \$opt{cropdetect_pos},
     'vol=s'               => \$opt{vol},
     'verbose!'            => \$opt{verbose},
+    'quiet'               => \$opt{quiet},
     'expand=s'            => \$opt{expand},
     'commands-only'       => \$opt{commands},
+    'scale=i'               => \$opt{scale},
 ) || usage();
 
 $opt{vob} = shift || usage();
@@ -48,7 +52,8 @@ if (-e 'frameno.avi') {
 
 unless (defined $opt{avi}) {
     $opt{avi} = $opt{vob};
-    $opt{avi} =~ s/\.(?:vob|mpe?g)$/.avi/i;
+    $opt{avi} =~ s/\.(?:vob|flv|avi|mpe?g)$//i;
+    $opt{avi} .= '.avi';
 }
 
 unless (defined $opt{bitrate}) {
@@ -69,15 +74,15 @@ unless (defined $opt{bitrate}) {
     print "Detected movie length: $length seconds\n" if $opt{verbose};
 
     ## calculate bitrate
-                      # 700 MB * DISCS - LENGTH * MP3 BITRATE (192) / LENGTH * 8
+    # 700 MB * DISCS - LENGTH * MP3 BITRATE (192) / LENGTH * 8
     my $bitrate = int((((700_000 * $opt{discs}) - ($length * 24)) / $length) * 8);
     print "Using bitrate: $bitrate\n" if $opt{verbose};
     $opt{bitrate} = $opt{codec} eq 'xvid' ? "bitrate=$bitrate" : "vbitrate=$bitrate";
 }
 
 $opt{vpass} = $opt{vpass} == 2 ? 1 : 0;
-my $vidopts = $opt{codec} eq 'xvid' ? '-xvidencopts' : '-lavcopts';
-my $pass    = $opt{codec} eq 'xvid' ? 'pass'         : 'vpass';
+my $vidopts = $opt{codec} eq 'xvid' ? '-xvidencopts' : ($opt{codec} eq 'divx' ? '-lavcopts' : undef);
+my $pass    = $opt{codec} eq 'xvid' ? 'pass' : 'vpass';
 
 unless (defined $opt{crop}) {
     my $cmd = join(' ',
@@ -89,8 +94,8 @@ unless (defined $opt{crop}) {
         '-o', '/dev/null',
         '-endpos', $opt{cropdetect_length},
         '-ss', $opt{cropdetect_pos},
-        '-vf', 'cropdetect=24:scale',
-        '-zoom', '-xy', 640,
+        '-vf',
+        $opt{scale} ? ('cropdetect=24:scale', '-zoom', '-xy', $opt{scale}) : ('cropdetect:24'),
         qq("$opt{vob}"), '2>/dev/null',
     );
     my @data = `$cmd`;
@@ -111,11 +116,9 @@ my @mencoder_opts = (
         @crop_opts,
         @expand_opts,
         @sid_opts,
-        '-vf-add', 'scale',
-        '-zoom',
-        '-xy', '640',
+        $opt{scale} ? ('-vf-add', 'scale', '-zoom', '-xy', $opt{scale}) : (),
         $opt{codec} eq 'divx' ? ('-ffourcc', 'divx') : (),
-        '-ovc', $opt{codec} eq 'xvid' ? 'xvid' : 'lavc',
+        '-ovc', $opt{codec} eq 'divx' ? 'lavc' : $opt{codec},
 );
 
 if ($opt{vpass} && !-e 'divx2pass.log') {
@@ -137,13 +140,14 @@ my $opts = join(':',
     $opt{bitrate}         ? ($opt{bitrate})  : (),
 );
 
-push @mencoder_opts, ($vidopts, $opts);
+push @mencoder_opts, $vidopts if defined $vidopts and $vidopts ne '';
+push @mencoder_opts, $opts if defined $opts and $opts ne '';
 
 if ($opt{commands}) {
     print join(' ', @mencoder_opts, '-o', qq("$opt{avi}"), qq("$opt{vob}")), "\n";
 } else {
     system(@mencoder_opts, '-o', $opt{avi}, $opt{vob})
-        && die("Error running second pass!");
+        && die("Error running last pass!");
 }
 
 exit 0;

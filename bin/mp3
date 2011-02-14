@@ -17,16 +17,15 @@ foreach my $file (@ARGV) {
     my $new = $file;
     my ($r, $scale, $amount) = ('', '', '');
     if (lc($1) eq 'pcm') {
-        $r = '-r';
+        $r = '-r --resample 44.1',
         $scale = '--scale';
         $amount = 5;
     }
     $new =~ s/\.(wav|pcm)$/.mp3/i;
     system(
         $lame,
-        '-h',
         '--vbr-new',
-        '--resample', '44.1',
+        '-V0',
         $r,
         $scale,
         $amount,

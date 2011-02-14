@@ -1,0 +1,15 @@
+#!/bin/bash
+
+NAME=$1
+
+mkdir -p /home/danial/.VirtualBox/HardDisks
+mkdir -p /home/danial/.VirtualBox/Machines
+vboxmanage createhd --filename /home/danial/.VirtualBox/HardDisks/$NAME --size 8192
+vboxmanage createvm --basefolder /home/danial/.VirtualBox/Machines --name $NAME --ostype Ubuntu_64 --register
+vboxmanage modifyvm $NAME --nic1 bridged
+vboxmanage modifyvm dev --bridgeadapter1 eth0
+vboxmanage modifyvm $NAME --audio none
+vboxmanage modifyvm $NAME --usb off
+vboxmanage storagectl $NAME --name "Sata Controller" --add sata --controller IntelAHCI --sataportcount 2
+vboxmanage storagectl $NAME --name "IDE Controller" --add ide --controller PIIX4
+vboxmanage storageattach $NAME --storagectl "Sata Controller" --port 1 --device 0 --type hdd --medium /home/danial/.VirtualBox/HardDisks/"$NAME".vdi
