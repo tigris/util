@@ -44,11 +44,7 @@ then
 fi
 if [ ! "$OUTPUT" ]
 then
-   echo "Usage: AAC2AC3 Input_File Output_File [Optional_Working_Directory]"
-   echo
-   echo "No output file specified."
-   echo
-   exit 1
+  OUTPUT=${INPUT%\.*}
 fi
 if [ -e "$OUTPUT" ]
 then
