@@ -2,6 +2,9 @@ if [ -f "/etc/bash.bashrc" ]; then
     source "/etc/bash.bashrc"
 fi
 
+# rvm
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+
 export BASH_ENV="$HOME/.bashrc"
 export PAGER="less -iX"
 export CVS_RSH="ssh"
@@ -51,4 +54,4 @@ if [ -f "$HOME/.oldpwd" ]; then
     rm "$HOME/.oldpwd"
 fi
 
-export PATH="$HOME/bin:$HOME/.gem/ruby/1.8/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.rvm/bin:$HOME/.gem/ruby/1.8/bin:$PATH"
