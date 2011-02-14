@@ -6,19 +6,6 @@ endif
 
 " set up HTML specific things
 function SetSpacings()
-  if (&filetype == "perl")
-    set shiftwidth=2
-    set tabstop=2
-  elseif (&filetype == "html")
-    set shiftwidth=2
-    set tabstop=2
-  elseif (&filetype == "vim")
-    set shiftwidth=2
-    set tabstop=2
-  elseif (&filetype == "ruby")
-    set shiftwidth=2
-    set tabstop=2
-  endif
 endfunction
 
 function GitBlame() range
@@ -151,8 +138,8 @@ syntax on
 filetype plugin on
 
 set list
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set expandtab
 set ignorecase
 set hlsearch
@@ -175,6 +162,7 @@ colorscheme default
 set background=dark
 set wildmenu
 set wildmode=list
+set modeline
 
 autocmd BufNewFile,BufRead,BufEnter *.tmpl set filetype=html
 autocmd BufNewFile,BufRead,BufEnter *.inc set filetype=html
