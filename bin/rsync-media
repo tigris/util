@@ -1,0 +1,7 @@
+rsync \
+  --recursive \
+  --delete \
+  --verbose \
+  --modify-window=4000 \
+  --no-perms \
+  /media/removable/audio/ /home/media/audio/
