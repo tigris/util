@@ -45,6 +45,7 @@ fi
 if [ ! "$OUTPUT" ]
 then
   OUTPUT=${INPUT%\.*}
+  OUTPUT="${OUTPUT}.mkv"
 fi
 if [ -e "$OUTPUT" ]
 then
