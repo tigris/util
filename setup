@@ -11,7 +11,7 @@ ln -sf ~/git/util/bin ~
 
 if [ ! -d "$HOME/git/util-private" ]; then
     cd ~/git
-    git clone git+ssh://danial@raphael.tigris.id.au/var/git/util-private
+    git clone git+ssh://danial@tigris.id.au/var/git/util-private
 fi
 cd ~/git/util-private
 git pull -q
