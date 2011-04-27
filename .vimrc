@@ -4,26 +4,8 @@ else
   set t_Co=8
 endif
 
-" set up HTML specific things
-function SetSpacings()
-endfunction
-
 function GitBlame() range
   execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
-endfunction
-
-function SetMappings()
-  if (&filetype == "perl")
-    imap ,s $
-    imap ,a @
-    imap ,h %
-    ab dumper use Data::Dumper; warn Dumper();<esc>hi
-  endif
-endfunction
-
-function SetPerlMappings()
-  set filetype=perl
-  call SetMappings()
 endfunction
 
 " toggle the paste option
@@ -175,15 +157,10 @@ autocmd BufNewFile,BufRead,BufEnter */t/*.t set filetype=perl
 
 autocmd BufNewFile,BufRead,BufEnter *.thor set filetype=ruby
 
-autocmd BufNewFile,BufRead,BufEnter * call SetSpacings()
-autocmd BufNewFile,BufRead,BufEnter * call SetMappings()
-
 " escape is too far from home keys
 imap ;; <esc>
 
-map ,1 :call SetPerlMappings()<cr>
 map ,2 :call TogglePaste()<cr>
-map ,3 :call ToggleCodingStyle()<cr>
 map ,4 :call ToggleFoldmethod()<cr>
 map ,5 :call ToggleBackground()<cr>
 map ,6 :call ToggleHLSearch()<cr>
