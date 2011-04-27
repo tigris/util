@@ -9,9 +9,23 @@ ln -sf ~/git/util/.bash_logout ~
 ln -sf ~/git/util/.vimrc ~
 ln -sf ~/git/util/bin ~
 
+mkdir -p ~/.vim/colors
+if [ `which wget` ]; then
+  wget \
+    --quiet \
+    --no-check-certificate \
+    --output-document ~/.vim/colors/solarized.vim \
+    https://github.com/altercation/vim-colors-solarized/raw/master/colors/solarized.vim
+elif [ `which curl` ]; then
+  curl \
+    --silent \
+    --output ~/.vim/colors/solarized.vim \
+    https://github.com/altercation/vim-colors-solarized/raw/master/colors/solarized.vim
+fi
+
 if [ ! -d "$HOME/git/util-private" ]; then
     cd ~/git
-    git clone git+ssh://danial@tigris.id.au/var/git/util-private
+    git clone git+ssh://danial@tigris.id.au/srv/git/util-private
 fi
 cd ~/git/util-private
 git pull -q

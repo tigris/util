@@ -1,7 +1,7 @@
 if has("terminfo")
   set t_Co=16
-"else
-"  set t_Co=8
+else
+  set t_Co=8
 endif
 
 " set up HTML specific things
@@ -158,7 +158,7 @@ set showcmd
 set showmatch
 set incsearch
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
-colorscheme default
+colorscheme solarized
 set background=dark
 set wildmenu
 set wildmode=list
