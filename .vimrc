@@ -159,7 +159,7 @@ set showmatch
 set incsearch
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 colorscheme solarized
-set background=dark
+set background=light
 set wildmenu
 set wildmode=list
 set modeline
