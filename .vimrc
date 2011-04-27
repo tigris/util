@@ -116,7 +116,6 @@ function FindSub(flags)
   return ''
 endfunction
 
-syntax on
 filetype plugin on
 
 set list
@@ -140,8 +139,6 @@ set showcmd
 set showmatch
 set incsearch
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
-colorscheme solarized
-set background=light
 set wildmenu
 set wildmode=list
 set modeline
@@ -181,3 +178,15 @@ autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "norm
 
 set encoding=utf-8
 set title
+
+syntax enable
+let g:solarized_termcolors = 16
+let g:solarized_termtrans  = 0
+let g:solarized_degrade    = 0
+let g:solarized_bold       = 1
+let g:solarized_underline  = 1
+let g:solarized_italic     = 1
+let g:solarized_contrast   = "normal"
+let g:solarized_visibility = "normal"
+colorscheme solarized
+set background=light
