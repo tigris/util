@@ -117,7 +117,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -315,7 +315,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -513,7 +513,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -711,7 +711,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -909,7 +909,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -1107,7 +1107,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -1305,7 +1305,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -1503,7 +1503,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -1701,7 +1701,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -1899,7 +1899,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -2097,7 +2097,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -2295,7 +2295,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -2493,7 +2493,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -2579,7 +2579,6 @@ Windows Registry Editor Version 5.00
 "SerialStopHalfbits"=dword:00000002
 "SerialParity"=dword:00000000
 "SerialFlowControl"=dword:00000001
-
 
 [HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\tigris.id.au]
 "Present"=dword:00000001
@@ -2692,7 +2691,7 @@ Windows Registry Editor Version 5.00
 "TryPalette"=dword:00000000
 "ANSIColour"=dword:00000001
 "Xterm256Colour"=dword:00000001
-"BoldAsColour"=dword:00000001
+"BoldAsColour"=dword:00000000
 "Colour0"="131,148,150"
 "Colour1"="147,161,161"
 "Colour2"="0,43,54"
@@ -2793,4 +2792,4 @@ Windows Registry Editor Version 5.00
 "rsa2@22:bouncer.tigris.id.au"="0x23,0xaa348eaf5402b264179fa2fa10a31c46ee32d86b909947cae52b6d9a00a21558a5aad2721aab7e1f8159a2a513d398f3ae0f74b2d36e7c3b058237ea1fdf86d417c4515519513d2594a61b3d67cc2fc0884b2d622c6d346b2a0d12593e5c800272697a09bbd51340c6e3e68b8e02488e8ac69291544453645587607e14ea565ec743440b520e2d8855798e64175bab45aaf1cdb0d8aadcf124122ccfeab8c688901895c3437f3ebd43e46dd0663288b58abda64d1e1a41bcf5517445c47b9f9e5fc928cdd3eca4fd88f3d18b2800e2ddf49d6ff430df7995af149a2f9a5e121b81218342628cdeab9b60c55a55ee00ccf5b944879c75be2ebc9c63f5178c1a13"
 "rsa2@22:home.tigris.id.au"="0x10001,0xc5becf7a9b845ee7469f551dd9c46c9def7dd5f0c8a1c6e80fe73b0be74c6c4cc22c301843662539071cc146da1ff7a34a25c65c588e880a6d1559cfeda7e663abbe93a5b725fd547add1121ee71a2ff69205f7685147e6f7fd890532780e682b82499df6f09c83042bb52fbbff9cea6eb2fd30a7dac2302a602c59ff8b14ab4110135d453c58b71e2b763d636444af2b236b6a3584968bddc7014843506a611bcd9072047c5db295f15892176eb8192be692a005e5f554ca997aff6dc42cbcebf608b9a623dfceef6f89bae2ec76d7eb9dbc52dcd2f9724c850ccffae2447ca30e606593d948604d8e28c27553cc172b2804404f3cd3bf27fba42ff5389f57f"
 "rsa2@22:danial-events.local"="0x10001,0xa3a4398b54dbe559ca52fc10781e883770c9c26a6686916be2311bf29ba5f6cf84c5eb0479f1f9fef32850a28e231e05f0ed6967a563e7cf98ccaba48faf377a6f42aacc4bf2901373742292b7231796c4d98380b05d6cf83a4fab84b350ea9264a3c84b00ac0cc8c6f4fc9c8c10c392dfedde83b676235e9cc7fc4caf05a132e5aa2417506aeb61e77de34586c7b231486666d67c645a0cfe02da6e8ae2d2279bf9fccef49cb194c27ff741ac63350158dc4c8f820416f8580fdbefca48b9c01ecdb915e474aba5aeeaf620f498cb67b5cf616f0638b422dbf6e77ca21497243d3650afd774ab03fe0496d37b03b662dfd2b3f09b50d7a7ec0c6998cc420d0f"
-"rsa2@22:db.cushycms.com"="0x23,0xcde013e4fae3004bbdc940ba836331edb7ff30242abc10d645952fc4b68ea3e792eb781930e4fc8e4b3a93d0ebbe3fb90ab4b7796b3f62d5dc122725129583a25d36b4add1c2f982ba4120e2eda3d5158869ca8592d0bfd8b032b34cc146898f4d6a233be24ce4abc454c791ca647d11196da5cdada9d3126211e234c14029ca98a17ee67840299a739ea232a28b8f063c900d7bebb7f15a2f6953fcd6b2f207212a662834d23755ef15c48753dfff60631f0b43d439cff2eb1f211d3f149f1f27af909f69b369af4266714fa09865c00b9f54596624c980e9f14267367775902f54213622dfa059e206f2ac7ed5f11f1152f378accc143e477f95b662fc9723"
+"rsa2@22:db.cushycms.com"="0x23,0x9b79a30af216276f718ba02032a466a078c1eef4cb5ad9e0386c94e6b65b45be7e18d7ba825d8a8d629932a12575987fd003197d2164a035519acb8ad8a431e55be5ef858201037bf84a3f594132c7bf2c8910a00fa08178094cf87982d0a248ebc42c0e959773a423a94570d0c454276019773931c4b9dc9bef6ac5b98b5421546102fb1908c90870e313463f1741aeec866fe04d3519563bc6ec41f677062339f2b6af91b680eb3d8bbf0315030a84d97396bdccbc2d07164b46291ee24f5e1782a26511ee8c9558cc854c9c9122641336f9956f3f29c4f6ce19bb91b7586e820b20ee18011d18ec973c6baafb153bd3cf8747bf6427f47146413a6ddaafe9"
