@@ -8,7 +8,7 @@ ln -sf ~/git/util/.bash_profile ~
 ln -sf ~/git/util/.bash_logout ~
 ln -sf ~/git/util/.vimrc ~
 ln -sf ~/git/util/bin ~
-ln -sf ~/git/util/dircolors-solarized-light ~/.dircolors
+ln -sf ~/git/util/dircolors-solarized-dark ~/.dircolors
 
 mkdir -p ~/.vim/colors
 if [ `which wget` ]; then

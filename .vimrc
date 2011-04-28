@@ -189,4 +189,4 @@ let g:solarized_italic     = 1
 let g:solarized_contrast   = "normal"
 let g:solarized_visibility = "normal"
 colorscheme solarized
-set background=light
+set background=dark
