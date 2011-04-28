@@ -39,6 +39,12 @@ if [ -f "$HOME/.bash/term/$TERM" ]; then
     source "$HOME/.bash/term/$TERM"
 fi
 
+if [ -f "$HOME/.dircolors" ]; then
+  dircolors -b "$HOME/.dircolors" > /tmp/dircolors-$USER
+  source /tmp/dircolors-$USER
+  rm /tmp/dircolors-$USER
+fi
+
 DISTRO=`uname`
 if [ -f "$HOME/.bash/distro/$DISTRO" ]; then
     source "$HOME/.bash/distro/$DISTRO"
