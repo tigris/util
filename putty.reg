@@ -1590,9 +1590,9 @@ Windows Registry Editor Version 5.00
 "SerialParity"=dword:00000000
 "SerialFlowControl"=dword:00000001
 
-[HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\dev]
+[HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\dev.office.statelesssystems.com]
 "Present"=dword:00000001
-"HostName"="dev"
+"HostName"="dev.office.statelesssystems.com"
 "LogFileName"="putty.log"
 "LogType"=dword:00000000
 "LogFileClash"=dword:ffffffff
@@ -2184,9 +2184,9 @@ Windows Registry Editor Version 5.00
 "SerialParity"=dword:00000000
 "SerialFlowControl"=dword:00000001
 
-[HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\home.tigris.id.au]
+[HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\doc.home.tigris.id.au]
 "Present"=dword:00000001
-"HostName"="home.tigris.id.au"
+"HostName"="doc.home.tigris.id.au"
 "LogFileName"="putty.log"
 "LogType"=dword:00000000
 "LogFileClash"=dword:ffffffff
