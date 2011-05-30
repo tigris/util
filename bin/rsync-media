@@ -4,4 +4,6 @@ rsync \
   --verbose \
   --modify-window=4000 \
   --no-perms \
+  --times --omit-dir-times \
+  --links \
   /media/removable/audio/ /home/media/audio/
