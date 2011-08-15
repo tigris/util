@@ -28,6 +28,10 @@ alias dmp='vim ~/junk/dmp'
 alias golf='vim ~/junk/golf'
 alias sql='vim ~/junk/dmp.sql'
 
+alias sshd='ssh doc.home.tigris.id.au'
+alias ssht='ssh tigris.id.au'
+alias ssho='ssh dev.office.statelesssystems.com'
+
 if [ `which vim` ]; then
     alias vi='vim'
     export EDITOR="vim"

@@ -1,3 +1,0 @@
-alias sshd='ssh doc'
-alias ssht='ssh tigris.id.au'
-alias ssho='ssh dev.office.statelesssystems.com'
