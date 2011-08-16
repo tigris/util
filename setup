@@ -25,8 +25,7 @@ elif [ `which curl` ]; then
 fi
 
 if [ `which fc-cache` ]; then
-  mkdir -p ~/.fonts
-  ln -sf ~/git/util/DroidSansMonoDotted.ttf ~/.fonts/DroidSansMonoDotted.ttf
+  ln -sf ~/git/util/fonts ~/.fonts
   sudo fc-cache -f
 fi
 
