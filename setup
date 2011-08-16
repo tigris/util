@@ -26,7 +26,7 @@ fi
 
 if [ `which fc-cache` ]; then
   mkdir -p ~/.fonts
-  ln -s ~/git/util/DroidSansMonoDotted.ttf ~/.fonts/DroidSansMonoDotted.ttf
+  ln -sf ~/git/util/DroidSansMonoDotted.ttf ~/.fonts/DroidSansMonoDotted.ttf
   sudo fc-cache -f
 fi
 
