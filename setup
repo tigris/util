@@ -2,6 +2,7 @@
 
 OLDPWD=`pwd`
 
+ln -sf ~/git/util/.ackrc ~
 ln -sf ~/git/util/.bash ~
 ln -sf ~/git/util/.bashrc ~
 ln -sf ~/git/util/.bash_profile ~
