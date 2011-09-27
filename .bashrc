@@ -43,7 +43,8 @@ if [ -f "$HOME/.bash/term/$TERM" ]; then
     source "$HOME/.bash/term/$TERM"
 fi
 
-if [ -f "$HOME/.dircolors" -a `which dircolors` ]; then
+dircolors=`which dircolors > /dev/null`
+if [ -f "$HOME/.dircolors" -a "x$?" == "x0" ]; then
   DIRCOLOR_VERSION=`dircolors --version | grep dircolors | awk '{ print $4 }' | cut -f1 -d'.'`
   if [ $DIRCOLOR_VERSION == "7" ]; then
     cat "$HOME/.dircolors" | sed 's/MULTIHARDLINK/HARDLINK/' | dircolors -b - > /tmp/dircolors-$USER
