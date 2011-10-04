@@ -6,7 +6,7 @@ fi
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 export BASH_ENV="$HOME/.bashrc"
-export PAGER="less -iX"
+export PAGER="less -eRiXF"
 export CVS_RSH="ssh"
 export RUBYOPT=rubygems
 
@@ -22,7 +22,7 @@ alias dc='cd' # I never could figure out that shit calculator anyway
 
 alias rgrep='grep -r'
 alias diff='diff -u'
-alias less='less -RiX' # don't use .lesskey, it screws your git paging/coloring!
+alias less=$PAGER # don't use .lesskey, it screws your git paging/coloring!
 
 alias dmp='vim ~/junk/dmp'
 alias golf='vim ~/junk/golf'
