@@ -1,6 +1,9 @@
 INPUT=$1
-OUTPUT=$2
-WORKDIR=$3
+WORKDIR="`pwd`"
+SUBS=${INPUT%\.*}
+SUBS="${SUBS}.srt"
+OUTPUT=${INPUT%\.*}
+OUTPUT="${OUTPUT}.mkv"
 
 # make sure all programs we need are installed
 if ! which mkvmerge mkvextract &> /dev/null
@@ -42,31 +45,6 @@ then
    echo "Usage: AAC2AC3 Input_File Output_File [Optional_Working_Directory]"
    echo
    echo "Specified input file doesn't exist."
-   echo
-   exit 1
-fi
-if [ ! "$OUTPUT" ]
-then
-  OUTPUT=${INPUT%\.*}
-  OUTPUT="${OUTPUT}.mkv"
-fi
-if [ -e "$OUTPUT" ]
-then
-   echo "Usage: AAC2AC3 Input_File Output_File [Optional_Working_Directory]"
-   echo
-   echo "Specified output file already exists."
-   echo
-   exit 1
-fi
-if [ ! "$WORKDIR" ]
-then
-   WORKDIR="`pwd`"
-fi
-if [ ! -d "$WORKDIR" ]
-then
-   echo "Usage: AAC2AC3 Input_File Output_File [Optional_Working_Directory]"
-   echo
-   echo "Specified working directory doesn't exist."
    echo
    exit 1
 fi
@@ -119,7 +97,12 @@ faad -b 2 -f 2 -q -w "$WORKDIR/AAC2AC3Temp.aac" | aften -v 0 -b 640 \
 -raw_fmt s24_le -raw_sr $RATE -raw_ch $CHANNELS -chmap 0 - "$WORKDIR/AAC2AC3Temp.ac3"
 
 # merge everything back together (except audio tracks from original file)
-mkvmerge -q -o "$OUTPUT" -A "$INPUT" "$WORKDIR/AAC2AC3Temp.ac3"
+if [ -e "$SUBS" ]
+then
+  mkvmerge -q -o "$OUTPUT" -A "$INPUT" --language 0:eng "$WORKDIR/AAC2AC3Temp.ac3" --language 0:eng "$SUBS"
+else
+  mkvmerge -q -o "$OUTPUT" -A "$INPUT" --language 0:eng "$WORKDIR/AAC2AC3Temp.ac3"
+fi
 
 # clean up temp files
 rm -f "$WORKDIR/AAC2AC3Temp.mkv"
