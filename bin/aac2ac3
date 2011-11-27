@@ -8,69 +8,68 @@ OUTPUT="${OUTPUT}.mkv"
 # make sure all programs we need are installed
 if ! which mkvmerge mkvextract &> /dev/null
 then
-   echo "MKVToolnix is missing.  Please install the mkvtoolnix package."
-   echo
-   exit 1
+  echo "MKVToolnix is missing.  Please install the mkvtoolnix package."
+  echo
+  exit 1
 fi
 if ! which faad &> /dev/null
 then
-   echo "FAAD2 is missing.  Please install the faad package."
-   echo
-   exit 1
+  echo "FAAD2 is missing.  Please install the faad package."
+  echo
+  exit 1
 fi
 if ! which aften &> /dev/null
 then
-   echo "Aften is missing.  Please install the aften package."
-   echo
-   exit 1
+  echo "Aften is missing.  Please install the aften package."
+  echo
+  exit 1
 fi
 if ! which mediainfo &> /dev/null
 then
-   echo "MediaInfo is missing. Please install the mediainfo package."
-   echo
-   exit 1
+  echo "MediaInfo is missing. Please install the mediainfo package."
+  echo
+  exit 1
 fi
 
 # make sure passed variables make sense
 if [ ! "$INPUT" ]
 then
-   echo "Usage: AAC2AC3 Input_File Output_File [Optional_Working_Directory]"
-   echo
-   echo "No input file specified."
-   echo
-   exit 1
+  echo "Usage: AAC2AC3 Input_File Output_File [Optional_Working_Directory]"
+  echo
+  echo "No input file specified."
+  echo
+  exit 1
 fi
 if [ ! -f "$INPUT" ]
 then
-   echo "Usage: AAC2AC3 Input_File Output_File [Optional_Working_Directory]"
-   echo
-   echo "Specified input file doesn't exist."
-   echo
-   exit 1
+  echo "Usage: AAC2AC3 Input_File Output_File [Optional_Working_Directory]"
+  echo
+  echo "Specified input file doesn't exist."
+  echo
+  exit 1
 fi
 
 # check if any temp files are already present
-if [ -e "$WORKDIR/AAC2AC3Temp.mkv" ] || [ -e "$WORKDIR/AAC2AC3Temp.aac" ] || \
-   [ -e "$WORKDIR/AAC2AC3Temp.ac3" ]
+if [ -e "$WORKDIR/AAC2AC3Temp.mkv" ] || [ -e "$WORKDIR/AAC2AC3Temp.aac" ] || [ -e "$WORKDIR/AAC2AC3Temp.ac3" ]
 then
-   echo "Files AAC2AC3Temp.mkv and/or AAC2AC3Temp.aac and/or AAC2AC3Temp.ac3"
-   echo "already exist in the working directory.  These will be overwritten."
-   echo
-   echo -n "Continue (y/n)?: "
-   read CONTINUE
-   echo
-   if ! ([ "$CONTINUE" == "y" ] || [ "$CONTINUE" == "Y" ])
-   then
-      echo
-      exit 1
-   fi
+  echo "Files AAC2AC3Temp.mkv and/or AAC2AC3Temp.aac and/or AAC2AC3Temp.ac3"
+  echo "already exist in the working directory.  These will be overwritten."
+  echo
+  echo -n "Continue (y/n)?: "
+  read CONTINUE
+  echo
+  if ! ([ "$CONTINUE" == "y" ] || [ "$CONTINUE" == "Y" ])
+  then
+    echo
+    exit 1
+  fi
 fi
 
 # check if the input file is an MP4 file
 if [[ "$INPUT" == *.mp4 ]] || [[ "$INPUT" == *.MP4 ]]
 then
-   mkvmerge -q --no-chapters -o "$WORKDIR/AAC2AC3Temp.mkv" "$INPUT"
-   INPUT="$WORKDIR/AAC2AC3Temp.mkv"
+  mkvmerge -q --no-chapters -o "$WORKDIR/AAC2AC3Temp.mkv" "$INPUT"
+  INPUT="$WORKDIR/AAC2AC3Temp.mkv"
 fi
 
 # figure out the 6 channel audio track
@@ -78,10 +77,10 @@ TRACK=`mediainfo "$INPUT" | grep -B9 '6 channels' | grep -B1 AAC | grep ID | sed
 
 if [ "x$TRACK" == "x" ]
 then
-   echo
-   echo "Could not determine the correct audio track."
-   echo
-   exit 1
+  echo
+  echo "Could not determine the correct audio track."
+  echo
+  exit 1
 fi
 
 # extract the specified track
