@@ -67,7 +67,7 @@ if [ -f "$HOME/.bash/host/$SHORT_HOST" ]; then
 fi
 
 if [ -f "$HOME/.oldpwd" ]; then
-    cd `cat "$HOME/.oldpwd"`
+    cd "`cat "$HOME/.oldpwd"`"
     rm "$HOME/.oldpwd"
 fi
 
