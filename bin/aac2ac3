@@ -34,7 +34,7 @@ fi
 # make sure passed variables make sense
 if [ ! "$INPUT" ]
 then
-  echo "Usage: AAC2AC3 Input_File Output_File [Optional_Working_Directory]"
+  echo "Usage: AAC2AC3 Input_File"
   echo
   echo "No input file specified."
   echo
@@ -42,7 +42,7 @@ then
 fi
 if [ ! -f "$INPUT" ]
 then
-  echo "Usage: AAC2AC3 Input_File Output_File [Optional_Working_Directory]"
+  echo "Usage: AAC2AC3 Input_File"
   echo
   echo "Specified input file doesn't exist."
   echo
