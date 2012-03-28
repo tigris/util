@@ -68,4 +68,4 @@ if [ -f "$HOME/.oldpwd" ]; then
   rm "$HOME/.oldpwd"
 fi
 
-export PATH="$HOME/bin"
+export PATH="$HOME/bin:$PATH"
