@@ -1,5 +1,1 @@
 export PATH="/usr/local/bin:/var/lib/gems/1.8/bin:$PATH"
-
-alias sshd='ssh donatello.tigris.id.au'
-alias ssht='ssh tigris.id.au'
-alias sshd='ssh dev.office.statelesssystems.com'

@@ -2,6 +2,7 @@
 
 OLDPWD=`pwd`
 
+ln -sf ~/git/util/.ackrc ~
 ln -sf ~/git/util/.bash ~
 ln -sf ~/git/util/.bashrc ~
 ln -sf ~/git/util/.bash_profile ~
@@ -22,6 +23,11 @@ elif [ `which curl` ]; then
     --silent \
     --output ~/.vim/colors/solarized.vim \
     https://github.com/altercation/vim-colors-solarized/raw/master/colors/solarized.vim
+fi
+
+if [ `which fc-cache` ]; then
+  ln -sf ~/git/util/fonts ~/.fonts
+  sudo fc-cache -f
 fi
 
 if [ ! -d "$HOME/git/util-private" ]; then

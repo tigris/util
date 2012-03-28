@@ -1,0 +1,5 @@
+--all
+--ignore-dir=gems
+--ignore-dir=.bundle
+--ignore-dir=data
+--ignore-dir=.sass-cache

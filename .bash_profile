@@ -5,7 +5,7 @@ fi
 # rvm
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
-export PAGER="less -iX"
+export PAGER="less -eRiXF"
 
 unset MAIL
 unset MAILCHECK
@@ -25,6 +25,11 @@ alias dmp='vim ~/junk/dmp'
 alias golf='vim ~/junk/golf'
 alias sql='vim ~/junk/dmp.sql'
 
+alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias sshd='ssh doc.home.tigris.id.au'
+alias ssht='ssh tigris.id.au'
+alias ssho='ssh dev.office.statelesssystems.com'
+
 if [ `which vim` ]; then
   alias vi='vim'
   export EDITOR="vim"
@@ -36,7 +41,8 @@ if [ -f "$HOME/.bash/term/$TERM" ]; then
   source "$HOME/.bash/term/$TERM"
 fi
 
-if [ -f "$HOME/.dircolors" -a `which dircolors` ]; then
+dircolors=`which dircolors > /dev/null`
+if [ -f "$HOME/.dircolors" -a "x$?" == "x0" ]; then
   DIRCOLOR_VERSION=`dircolors --version | grep dircolors | awk '{ print $4 }' | cut -f1 -d'.'`
   if [ $DIRCOLOR_VERSION == "7" ]; then
     cat "$HOME/.dircolors" | sed 's/MULTIHARDLINK/HARDLINK/' | dircolors -b - > /tmp/dircolors-$USER
