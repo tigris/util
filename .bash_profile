@@ -19,7 +19,7 @@ alias dc='cd' # I never could figure out that shit calculator anyway
 
 alias rgrep='grep -r'
 alias diff='diff -u'
-alias less='less -RiX' # don't use .lesskey, it screws your git paging/coloring!
+alias less=$PAGER # don't use .lesskey, it screws your git paging/coloring!
 
 alias dmp='vim ~/junk/dmp'
 alias golf='vim ~/junk/golf'
@@ -64,8 +64,8 @@ if [ -f "$HOME/.bash/host/$SHORT_HOST" ]; then
 fi
 
 if [ -f "$HOME/.oldpwd" ]; then
-  cd `cat "$HOME/.oldpwd"`
+  cd "`cat "$HOME/.oldpwd"`"
   rm "$HOME/.oldpwd"
 fi
 
-export PATH="$HOME/bin:$HOME/.rvm/bin:$HOME/.gem/ruby/1.8/bin:$PATH"
+export PATH="$HOME/bin"
