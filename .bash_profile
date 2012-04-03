@@ -68,4 +68,9 @@ if [ -f "$HOME/.oldpwd" ]; then
   rm "$HOME/.oldpwd"
 fi
 
+if [ -d "$HOME/.rbenv" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
 export PATH="$HOME/bin:$PATH"
