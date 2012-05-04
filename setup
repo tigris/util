@@ -39,6 +39,10 @@ fi
 if [ `which fc-cache` ]; then
   ln -sf ~/git/util/fonts ~/.fonts
   sudo fc-cache -f
+  if [ `which gnome-terminal` -a `which gconftool-2` ]; then
+    gconftool-2 --set "/apps/gnome-terminal/profiles/Default/use_system_font" --type bool false
+    gconftool-2 --set "/apps/gnome-terminal/profiles/Default/font" --type string "Droid Sans Mono Dotted 9"
+  fi
 fi
 
 if [ `which gnome-terminal` -a `which gconftool-2` ]; then
