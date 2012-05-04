@@ -18,11 +18,22 @@ if [ `which wget` ]; then
     --no-check-certificate \
     --output-document ~/.vim/colors/solarized.vim \
     https://github.com/altercation/vim-colors-solarized/raw/master/colors/solarized.vim
+  wget \
+    --quiet \
+    --no-check-certificate \
+    --output-document ~/.Xresources \
+    https://github.com/altercation/solarized/raw/master/xresources-colors-solarized/Xresources
+  xrdb -merge ~/.Xresources
 elif [ `which curl` ]; then
   curl \
     --silent \
     --output ~/.vim/colors/solarized.vim \
     https://github.com/altercation/vim-colors-solarized/raw/master/colors/solarized.vim
+  curl \
+    --silent \
+    --output ~/.Xresources \
+    https://github.com/altercation/solarized/raw/master/xresources-colors-solarized/Xresources
+  xrdb -merge ~/.Xresources
 fi
 
 if [ `which fc-cache` ]; then
