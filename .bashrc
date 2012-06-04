@@ -22,7 +22,6 @@ alias dmp='vim ~/junk/dmp'
 alias golf='vim ~/junk/golf'
 alias sql='vim ~/junk/dmp.sql'
 
-alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias sshd='ssh doc.home.tigris.id.au'
 alias ssht='ssh tigris.id.au'
 alias ssho='ssh dev.office.statelesssystems.com'
