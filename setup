@@ -58,6 +58,8 @@ which fc-cache > /dev/null
 fc_cache=$?
 which gnome-terminal gconftool-2 > /dev/null
 gnome_term=$?
+which mate-terminal mateconftool-2 > /dev/null
+mate_term=$?
 
 if [ "x$fc_cache" == "x0" ]; then
   echo -n "Installing custom fonts..."
@@ -68,6 +70,11 @@ if [ "x$fc_cache" == "x0" ]; then
     echo -n "Configuring gnome-terminal to use custom fonts..."
     gconftool-2 --set "/apps/gnome-terminal/profiles/Default/use_system_font" --type bool false
     gconftool-2 --set "/apps/gnome-terminal/profiles/Default/font" --type string "Droid Sans Mono Dotted 9"
+    echo " done"
+  elif [ "x$mate_term" == "x0" ]; then
+    echo -n "Configuring mate-terminal to use custom fonts..."
+    mateconftool-2 --set "/apps/mate-terminal/profiles/Default/use_system_font" --type bool false
+    mateconftool-2 --set "/apps/mate-terminal/profiles/Default/font" --type string "Droid Sans Mono Dotted 9"
     echo " done"
   fi
 else
@@ -82,8 +89,16 @@ if [ "x$gnome_term" == "x0" ]; then
   gconftool-2 --set "/apps/gnome-terminal/profiles/Default/background_color" --type string "#00002B2B3636"
   gconftool-2 --set "/apps/gnome-terminal/profiles/Default/foreground_color" --type string "#65657B7B8383"
   echo " done"
+elif [ "x$mate_term" == "x0" ]; then
+  echo -n "Configuring mate-terminal to use solarized color scheme..."
+  mateconftool-2 --set "/apps/mate-terminal/profiles/Default/use_theme_background" --type bool false
+  mateconftool-2 --set "/apps/mate-terminal/profiles/Default/use_theme_colors" --type bool false
+  mateconftool-2 --set "/apps/mate-terminal/profiles/Default/palette" --type string "#070736364242:#D3D301010202:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
+  mateconftool-2 --set "/apps/mate-terminal/profiles/Default/background_color" --type string "#00002B2B3636"
+  mateconftool-2 --set "/apps/mate-terminal/profiles/Default/foreground_color" --type string "#65657B7B8383"
+  echo " done"
 else
-  echo "No gnome-terminal, skipping terminal setup."
+  echo "No gnome or mate terminal, skipping terminal setup."
 fi
 
 cd $OLDPWD
