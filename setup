@@ -19,6 +19,9 @@ echo -n "Setting up solorized color scheme for dircolors..."
 ln -sf ~/git/util/dircolors-solarized-dark ~/.dircolors
 echo " done"
 
+which xrdb > /dev/null
+xrdb=$?
+
 mkdir -p ~/.vim/colors
 if [ `which wget` ]; then
   echo -n "Using wget to setup solorized color scheme for vim..."
@@ -28,14 +31,18 @@ if [ `which wget` ]; then
     --output-document ~/.vim/colors/solarized.vim \
     https://github.com/altercation/vim-colors-solarized/raw/master/colors/solarized.vim
   echo " done"
-  echo -n "Using wget to setup solorized color scheme for X..."
-  wget \
-    --quiet \
-    --no-check-certificate \
-    --output-document ~/.Xresources \
-    https://github.com/altercation/solarized/raw/master/xresources-colors-solarized/Xresources
-  xrdb -merge ~/.Xresources
-  echo " done"
+  if [ "x$xrdb" == "x0" ]; then
+    echo -n "Using wget to setup solorized color scheme for X..."
+    wget \
+      --quiet \
+      --no-check-certificate \
+      --output-document ~/.Xresources \
+      https://github.com/altercation/solarized/raw/master/xresources-colors-solarized/Xresources
+    xrdb -merge ~/.Xresources
+    echo " done"
+  else
+    echo "No xrdb, skipping X setup."
+  fi
 elif [ `which curl` ]; then
   echo -n "Using curl to setup solorized color scheme for vim..."
   curl \
@@ -43,13 +50,17 @@ elif [ `which curl` ]; then
     --output ~/.vim/colors/solarized.vim \
     https://github.com/altercation/vim-colors-solarized/raw/master/colors/solarized.vim
   echo " done"
-  echo -n "Using curl to setup solorized color scheme for X..."
-  curl \
-    --silent \
-    --output ~/.Xresources \
-    https://github.com/altercation/solarized/raw/master/xresources-colors-solarized/Xresources
-  xrdb -merge ~/.Xresources
-  echo " done"
+  if [ "x$xrdb" == "x0" ]; then
+    echo -n "Using curl to setup solorized color scheme for X..."
+    curl \
+      --silent \
+      --output ~/.Xresources \
+      https://github.com/altercation/solarized/raw/master/xresources-colors-solarized/Xresources
+    xrdb -merge ~/.Xresources
+    echo " done"
+  else
+    echo "No xrdb, skipping X setup."
+  fi
 else
   echo "No curl/wget found, setup solorized color scheme for vim/X skipped."
 fi
