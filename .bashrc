@@ -2,6 +2,9 @@ if [ -f "/etc/bash.bashrc" ]; then
     source "/etc/bash.bashrc"
 fi
 
+umask 002
+set -o ignoreeof
+
 export PAGER="less -eRiXF"
 
 unset MAIL
@@ -24,7 +27,6 @@ alias sql='vim ~/junk/dmp.sql'
 
 alias sshd='ssh doc.home.tigris.id.au'
 alias ssht='ssh tigris.id.au'
-alias ssho='ssh dev.office.statelesssystems.com'
 
 if [ `which vim` ]; then
   alias vi='vim'
