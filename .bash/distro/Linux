@@ -11,5 +11,5 @@ alias vless='/usr/share/vim/vim72/macros/less.sh'
 
 # no system beeps
 if [ "$TERM" -a "x$TERM" != "xdumb" ]; then
-    which setterm && setterm -blength 0
+    which setterm >/dev/null && setterm -blength 0
 fi
