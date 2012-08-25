@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ -f "/tmp/rsync-seedbox-hourly.lock" ]; then
+  exit 0;
+fi
+
+touch "/tmp/rsync-seedbox-hourly.lock"
+rsync --quiet --rsh 'ssh -q' --inplace --recursive --timeout 360 tigris.id.au:/home/danial/sync/hourly/ /volume1/incoming/torrents/ > /dev/null
+#find /incoming/torrents/ -type f -exec chmod 664 {} \;
+#find /incoming/torrents/ -type d -exec chmod 775 {} \;
+rm "/tmp/rsync-seedbox-hourly.lock"
+
+exit 0;

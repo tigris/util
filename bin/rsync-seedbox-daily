@@ -1,0 +1,7 @@
+#!/bin/sh
+
+rsync --quiet --rsh 'ssh -q' --inplace --recursive --timeout 360 tigris.id.au:/home/danial/sync/daily/ /volume1/incoming/torrents/ > /dev/null
+#find /incoming/torrents/ -type f -exec chmod 664 {} \;
+#find /incoming/torrents/ -type d -exec chmod 775 {} \;
+
+exit 0;
