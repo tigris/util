@@ -1,0 +1,9 @@
+#!/bin/sh
+
+/usr/syno/bin/rsync --quiet --rsh 'ssh -q -i /var/services/homes/danial/.ssh/id_rsa -F /var/services/homes/danial/.ssh/config' --inplace --recursive --timeout 360 danial@tigris.id.au:/home/danial/sync/daily/ /volume1/incoming/torrents/ > /dev/null
+find /incoming/torrents/ -type f -exec chmod 664 {} \;
+find /incoming/torrents/ -type d -exec chmod 775 {} \;
+find /incoming/torrents/ -type f -exec chown danial.users {} \;
+find /incoming/torrents/ -type d -exec chown danial.users {} \;
+
+exit 0;
