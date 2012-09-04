@@ -8,7 +8,6 @@ function GitBlame() range
   execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
 endfunction
 
-" toggle the paste option
 function TogglePaste()
   if (&paste)
     set nopaste
@@ -19,21 +18,6 @@ function TogglePaste()
   echo ''
 endfunction
 
-" toggle the foldmethod option between manual and indent
-" NB: it will forget which folds you have open if you toggle it off then on
-function ToggleFoldmethod()
-  if (&foldmethod=="manual")
-    set foldmethod=indent
-    1,$foldclose!
-  else
-    set foldmethod=manual
-    1,$foldopen!
-  endif
-  return ''
-  echo ''
-endfunction
-
-" toggle syntax highlighting
 function ToggleSyntax()
   if (has("syntax_items"))
     syntax off
@@ -44,23 +28,11 @@ function ToggleSyntax()
   echo ''
 endfunction
 
-" toggle the syntax coloring
 function ToggleBackground()
   if (&background=="dark")
     set background=light
   else
     set background=dark
-  endif
-  return ''
-  echo ''
-endfunction
-
-" toggle the hlsearch thing for when you can't find your cursor
-function ToggleHLSearch()
-  if (&hlsearch)
-    set nohlsearch
-  else
-    set hlsearch
   endif
   return ''
   echo ''
@@ -93,29 +65,6 @@ function ToggleLineNumbers()
   return ''
 endfunction
 
-" function to set coding style for perl
-function ToggleCodingStyle()
-  if (&tabstop == 4)
-    set tabstop=8
-    set expandtab
-  else
-    set tabstop=4
-    set noexpandtab
-  endif
-  echo ''
-  return ''
-endfunction
-
-" function to find the start of the next perl sub function
-function FindSub(flags)
-  let n = search('^sub \w\+\s*\(([\$@%]*)\)\=\s*{\s*$', a:flags)
-  if (n > 0)
-    normal cursor(n, 1)
-  endif
-  echo ''
-  return ''
-endfunction
-
 filetype plugin on
 
 set list
@@ -143,38 +92,30 @@ set wildmenu
 set wildmode=list
 set modeline
 
-autocmd BufNewFile,BufRead,BufEnter *.tmpl set filetype=html
-autocmd BufNewFile,BufRead,BufEnter *.inc set filetype=html
-autocmd BufNewFile,BufRead,BufEnter *.chtml set filetype=html
-autocmd BufNewFile,BufRead,BufEnter *.schtml set filetype=html
-autocmd BufNewFile,BufRead,BufEnter *.html.erb set filetype=html
+"autocmd BufNewFile,BufRead,BufEnter *.html.erb set filetype=html
+autocmd BufNewFile,BufRead,BufEnter *.thor     set filetype=ruby
+autocmd BufReadPost                 *          if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
-autocmd BufNewFile,BufRead,BufEnter *funcs-rsearch/* set filetype=perl
-autocmd BufNewFile,BufRead,BufEnter */t/*.t set filetype=perl
-
-autocmd BufNewFile,BufRead,BufEnter *.thor set filetype=ruby
-
-" escape is too far from home keys
-imap ;; <esc>
-
-map ,2 :call TogglePaste()<cr>
-map ,4 :call ToggleFoldmethod()<cr>
-map ,5 :call ToggleBackground()<cr>
-map ,6 :call ToggleHLSearch()<cr>
-map ,7 :call ToggleSyntax()<cr>
+    imap ;;    <esc>
+    imap <c-s> <c-o><c-s>
+    imap <c-s> <esc><c-s>
+    imap <c-q> <esc><c-q>
+    imap <c-x> <esc><c-x>
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-map ,a :call GitBlame()<cr>
-map ,s :!ispell %<cr>
-map ,tc :!perl -cT %<cr>
-map ,tp :!perl -T %<cr>
-map ,c :!perl -c -I . -I ./lib -I ../lib %<cr>
-map ,p :!perl -I . -I ./lib -I ../lib %<cr>
-map ,r :!ruby %<cr>
-map ,n :call ToggleLineNumbers()<cr>
-map [[ :call FindSub("Wb")<cr>
-map ]] :call FindSub("W")<cr>
-vnoremap p <esc>:let current_reg = @"<cr>gvdi<c-r>=current_reg<cr><esc>
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+     map ,2    :call TogglePaste()<cr>
+     map ,4    :call ToggleFoldmethod()<cr>
+     map ,5    :call ToggleBackground()<cr>
+     map ,6    :call ToggleHLSearch()<cr>
+     map ,7    :call ToggleSyntax()<cr>
+     map ,a    :call GitBlame()<cr>
+     map ,s    :!ispell %<cr>
+     map ,r    :!%<cr>
+     map ,n    :call ToggleLineNumbers()<cr>
+     map <c-s> :w<cr>
+     map <c-a> ggVG
+     map <c-q> :q<cr>
+     map <c-x> :x<cr>
+vnoremap p     <esc>:let current_reg = @"<cr>gvdi<c-r>=current_reg<cr><esc>
 
 set encoding=utf-8
 set title
