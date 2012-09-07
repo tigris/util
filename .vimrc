@@ -91,6 +91,7 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.i
 set wildmenu
 set wildmode=list
 set modeline
+set number
 
 "autocmd BufNewFile,BufRead,BufEnter *.html.erb set filetype=html
 autocmd BufNewFile,BufRead,BufEnter *.thor     set filetype=ruby
