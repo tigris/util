@@ -72,8 +72,9 @@ then
   INPUT="$WORKDIR/AAC2AC3Temp.mkv"
 fi
 
-# figure out the 6 channel audio track
-TRACK=`mediainfo "$INPUT" | grep -B9 '6 channels' | grep -B1 AAC | grep ID | sed 's/[^0-9]//g'`
+# figure out the 6 channel audio track (mkvextract changed to tracks starting at 0 in version 5.4.0)
+#TRACK=`mediainfo "$INPUT" | grep -B9 '6 channels' | grep -B1 AAC | grep ID | sed 's/[^0-9]//g'`
+TRACK=`mkvinfo AAC2AC3Temp.mkv | grep -B10 '+ Channels: 6' | grep 'Track number' | sed 's/^.*mkvextract: \([0-9]\+\).*$/\1/'`
 
 if [ "x$TRACK" == "x" ]
 then
@@ -96,10 +97,10 @@ faad -b 2 -f 2 -q -w "$WORKDIR/AAC2AC3Temp.aac" | aften -v 0 -b 640 \
 -raw_fmt s24_le -raw_sr $RATE -raw_ch $CHANNELS -chmap 0 - "$WORKDIR/AAC2AC3Temp.ac3"
 
 # merge everything back together (except audio tracks from original file)
-mkvmerge -q -o "$WORKDIR/AAC2AC3TempNoSubs.mkv" -A -S "$INPUT" -D -S --language 0:eng "$WORKDIR/AAC2AC3Temp.ac3"
+mkvmerge -q -o "$WORKDIR/AAC2AC3TempNoSubs.mkv" --compression -1:none -A -S "$INPUT" -D -S --language -1:eng --compression -1:none "$WORKDIR/AAC2AC3Temp.ac3"
 if [ -e "$SUBS" ]
 then
-  mkvmerge -q -o "$OUTPUT" -S "$WORKDIR/AAC2AC3TempNoSubs.mkv" -D -A --language 0:eng "$SUBS"
+  mkvmerge -q -o "$OUTPUT" --compression -1:none -S "$WORKDIR/AAC2AC3TempNoSubs.mkv" -D -A --language -1:eng --compression -1:none "$SUBS"
 else
   mv "$WORKDIR/AAC2AC3TempNoSubs.mkv" "$OUTPUT"
 fi
