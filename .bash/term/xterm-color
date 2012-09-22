@@ -4,4 +4,5 @@ print_git_branch() {
   echo "$BRANCH$CHANGED"
 }
 
+export PROMPT_COMMAND='echo -ne "\033]0;${LOGNAME}@${HOSTNAME}: ${PWD}\007"'
 export PS1='\[\e[0;33m\][$(date +%H:%M:%S)] \[\e[0;32m\]$(pwd) \[\e[0;35m\]$(print_git_branch)\n\[\e[0;31m\]\u\[\e[0;39m\]@\[\e[0;31m\]\h\[\e[0;39m\]$ '
