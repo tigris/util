@@ -18,6 +18,7 @@ echo " done"
 
 echo -n "Setting up solorized color scheme for dircolors..."
 ln -sf ~/git/util/dircolors-solarized-dark ~/.dircolors
+ln -sf ~/git/util/dircolors-solarized-dark ~/.dircolors.old
 echo " done"
 
 which xrdb > /dev/null
@@ -110,5 +111,12 @@ elif [ "x$mate_term" == "x0" ]; then
 else
   echo "No gnome or mate terminal, skipping terminal setup."
 fi
+
+echo -n "Setting up dircolors..."
+cat "$HOME/.dircolors.old" | sed 's/MULTIHARDLINK/HARDLINK/' | dircolors -b > /tmp/dircolors-$USER
+mv /tmp/dircolors-$USER "$HOME/.dircolors.old.compiled"
+dircolors -b "$HOME/.dircolors" > /tmp/dircolors-$USER
+mv /tmp/dircolors-$USER "$HOME/.dircolors.compiled"
+echo " done"
 
 cd $OLDPWD

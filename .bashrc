@@ -43,12 +43,10 @@ dircolors=`which dircolors > /dev/null`
 if [ -f "$HOME/.dircolors" -a "x$?" == "x0" ]; then
   DIRCOLOR_VERSION=`dircolors --version | grep dircolors | awk '{ print $4 }' | cut -f1 -d'.'`
   if [ $DIRCOLOR_VERSION == "7" ]; then
-    cat "$HOME/.dircolors" | sed 's/MULTIHARDLINK/HARDLINK/' | dircolors -b - > /tmp/dircolors-$USER
+    source $HOME/.dircolors.old.compiled
   else
-    dircolors -b "$HOME/.dircolors" > /tmp/dircolors-$USER
+    source $HOME/.dircolors.compiled
   fi
-  source /tmp/dircolors-$USER
-  rm /tmp/dircolors-$USER
 fi
 
 DISTRO=`uname`
