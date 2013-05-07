@@ -70,7 +70,7 @@ fi
 
 if [ -f "$HOME/.oldpwd" ]; then
   cd "`cat "$HOME/.oldpwd"`"
-  rm "$HOME/.oldpwd"
+  rm -f "$HOME/.oldpwd"
 fi
 
 export PATH="$HOME/bin:$PATH"
