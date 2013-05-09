@@ -71,6 +71,8 @@ which gnome-terminal gconftool-2 > /dev/null
 gnome_term=$?
 which mate-terminal mateconftool-2 > /dev/null
 mate_term=$?
+which xfce4-terminal > /dev/null
+xfce_term=$?
 
 if [ "x$fc_cache" == "x0" ]; then
   echo -n "Installing custom fonts..."
@@ -108,8 +110,13 @@ elif [ "x$mate_term" == "x0" ]; then
   mateconftool-2 --set "/apps/mate-terminal/profiles/Default/background_color" --type string "#00002B2B3636"
   mateconftool-2 --set "/apps/mate-terminal/profiles/Default/foreground_color" --type string "#65657B7B8383"
   echo " done"
+elif [ "x$xfce_term" == "x0" ]; then
+  echo -n "Configuring xfce-terminal to use solarized color scheme..."
+  mkdir -p ~/.config/Terminal
+  cp ~/git/util/xfce-configs/solarized-dark.config ~/.config/Terminal/terminalrc
+  echo " done"
 else
-  echo "No gnome or mate terminal, skipping terminal setup."
+  echo "No gnome, xfce or mate terminal, skipping terminal setup."
 fi
 
 echo -n "Setting up dircolors..."
