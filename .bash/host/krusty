@@ -1,1 +1,2 @@
 alias ssha='ssh -i ~/.ssh/information-systems-ap-southwest.pem -l ec2-user'
+alias my='mysql -u root myworkbench_dev'
