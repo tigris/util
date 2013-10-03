@@ -1,8 +1,17 @@
 print_git_branch() {
-  BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'`
-  CHANGED=`git status 2> /dev/null | grep 'use "git' | head -n1 | sed -e 's/.*/*/'`
-  echo "$BRANCH$CHANGED"
+  branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'`
+  dirty=`git status 2> /dev/null | grep 'use "git' | head -n1 | sed -e 's/.*/*/'`
+  echo "$branch$dirty"
 }
 
-export PROMPT_COMMAND='echo -ne "\033]0;${LOGNAME}@${HOSTNAME}: ${PWD}\007"'
-export PS1='\[\e[0;33m\][$(date +%H:%M:%S)] \[\e[0;32m\]$(pwd) \[\e[0;35m\]$(print_git_branch)\n\[\e[0;31m\]\u\[\e[0;39m\]@\[\e[0;31m\]\h\[\e[0;39m\]$ '
+cursor_color() {
+  if [ "x$exitStatus" == x0 ]; then
+    echo -n '32'
+  else
+    echo -n '31'
+  fi
+}
+
+export PROMPT_COMMAND='exitStatus=$?; echo -ne "\033]0;${LOGNAME}@${HOSTNAME}: ${PWD}\007"'
+export PS1='\[\e[0;33m\][$(date +%H:%M:%S)]\[\e[0;39m\] \[\e[0;34m\]$LOGNAME\[\e[0;39m\]@\[\e[0;34m\]$HOSTNAME\[\e[0;39m\]:\[\e[0;35m\]$(pwd)\[\e[0;39m\] \[\e[0;36m\]$(print_git_branch)\[\e[0;39m\]\n\[\e[0;$(cursor_color $prev_exit)m\]❯\[\e[0;39m\] '
+export PS2='❯ '
