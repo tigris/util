@@ -28,6 +28,10 @@ alias sql='vim ~/junk/dmp.sql'
 alias sshd='ssh doc.home.tigris.id.au'
 alias ssht='ssh tigris.id.au'
 
+alias be='bundle exec'
+alias ber='bundle exec rake'
+alias my='mysql -u root'
+
 if [ `which vim` ]; then
   alias vi='vim'
   export EDITOR="vim"
