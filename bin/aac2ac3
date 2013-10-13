@@ -66,7 +66,7 @@ then
 fi
 
 # check if the input file is an MP4 file
-if [[ "$INPUT" == *.mp4 ]] || [[ "$INPUT" == *.MP4 ]]
+if [[ "$INPUT" == *.mp4 ]] || [[ "$INPUT" == *.MP4 ]] || [[ "$INPUT" == *.avi ]] || [[ "$INPUT" == *.AVI ]]
 then
   mkvmerge -q --no-chapters -o "$WORKDIR/AAC2AC3Temp.mkv" "$INPUT"
   INPUT="$WORKDIR/AAC2AC3Temp.mkv"
