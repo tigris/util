@@ -29,6 +29,7 @@ alias sshd='ssh doc.home.tigris.id.au'
 alias ssht='ssh tigris.id.au'
 
 alias be='bundle exec'
+alias bi='bundle install'
 alias ber='bundle exec rake'
 alias my='mysql -u root'
 
