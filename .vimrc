@@ -4,6 +4,14 @@ else
   set t_Co=8
 endif
 
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+Bundle 'scrooloose/nerdtree'
+
 function GitBlame() range
   execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
 endfunction
@@ -65,7 +73,7 @@ function ToggleLineNumbers()
   return ''
 endfunction
 
-filetype plugin on
+filetype plugin indent on
 
 set list
 set shiftwidth=2
@@ -96,6 +104,8 @@ set number
 "autocmd BufNewFile,BufRead,BufEnter *.html.erb set filetype=html
 autocmd BufNewFile,BufRead,BufEnter *.thor     set filetype=ruby
 autocmd BufReadPost                 *          if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+autocmd vimenter * if !argc() | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
     imap ;;    <esc>
     imap <c-s> <c-o><c-s>
@@ -103,6 +113,8 @@ autocmd BufReadPost                 *          if line("'\"") > 0 && line("'\"")
     imap <c-q> <esc><c-q>
     imap <c-x> <esc><c-x>
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+    imap <c-n> <esc><c-n>
+     map <c-n> :NERDTreeToggle<cr>
      map ,2    :call TogglePaste()<cr>
      map ,4    :call ToggleFoldmethod()<cr>
      map ,5    :call ToggleBackground()<cr>
@@ -116,6 +128,7 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
      map <c-a> ggVG
      map <c-q> :q<cr>
      map <c-x> :x<cr>
+     map <space> <c-w>
 vnoremap p     <esc>:let current_reg = @"<cr>gvdi<c-r>=current_reg<cr><esc>
 
 set encoding=utf-8
