@@ -11,6 +11,11 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'vim-scripts/ZoomWin'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'mileszs/ack.vim'
 
 function GitBlame() range
   execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
@@ -133,6 +138,8 @@ vnoremap p     <esc>:let current_reg = @"<cr>gvdi<c-r>=current_reg<cr><esc>
 
 set encoding=utf-8
 set title
+
+let g:EasyMotion_leader_key = '\'
 
 syntax enable
 let g:solarized_termcolors = 16
