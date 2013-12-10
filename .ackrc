@@ -3,3 +3,6 @@
 --ignore-dir=.bundle
 --ignore-dir=data
 --ignore-dir=.sass-cache
+--ignore-dir=target
+--ignore-dir=spec/reports
+--ignore-dir=log
