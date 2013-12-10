@@ -5,4 +5,6 @@
 --ignore-dir=.sass-cache
 --ignore-dir=target
 --ignore-dir=spec/reports
+--ignore-dir=spec/coverage
+--ignore-dir=reports
 --ignore-dir=log
