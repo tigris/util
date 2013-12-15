@@ -76,7 +76,7 @@ xfce_term=$?
 
 if [ "x$fc_cache" == "x0" ]; then
   echo -n "Installing custom fonts..."
-  ln -sf ~/git/util/fonts ~/.fonts
+  [ -e ~/.fonts ] || ln -sf ~/git/util/fonts ~/.fonts
   sudo fc-cache -f
   echo " done"
   if [ "x$gnome_term" == "x0" ]; then
