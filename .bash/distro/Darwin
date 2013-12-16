@@ -1,5 +1,5 @@
 export CLICOLOR=1
-export LSCOLORS="ExGxcxdxCxbxCxCxExEx"
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 if [ -e /usr/local/opt/chruby/share/chruby/chruby.sh ]; then
   source /usr/local/opt/chruby/share/chruby/chruby.sh
