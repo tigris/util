@@ -30,14 +30,14 @@ if [ `which wget` ]; then
   wget \
     --quiet \
     --output-document ~/.vim/colors/solarized.vim \
-    http://github.com/altercation/vim-colors-solarized/raw/master/colors/solarized.vim
+    https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
   echo " done"
   if [ "x$xrdb" == "x0" ]; then
     echo -n "Using wget to setup solorized color scheme for X..."
     wget \
       --quiet \
       --output-document ~/.Xresources \
-      http://github.com/altercation/solarized/raw/master/xresources-colors-solarized/Xresources
+      https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
     xrdb -merge ~/.Xresources
     echo " done"
   else
@@ -48,14 +48,14 @@ elif [ `which curl` ]; then
   curl \
     --silent \
     --output ~/.vim/colors/solarized.vim \
-    http://github.com/altercation/vim-colors-solarized/raw/master/colors/solarized.vim
+    https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
   echo " done"
   if [ "x$xrdb" == "x0" ]; then
     echo -n "Using curl to setup solorized color scheme for X..."
     curl \
       --silent \
       --output ~/.Xresources \
-      http://github.com/altercation/solarized/raw/master/xresources-colors-solarized/Xresources
+      https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
     xrdb -merge ~/.Xresources
     echo " done"
   else
