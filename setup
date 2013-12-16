@@ -119,12 +119,14 @@ else
   echo "No gnome, xfce or mate terminal, skipping terminal setup."
 fi
 
-echo -n "Setting up dircolors..."
-cat "$HOME/.dircolors.old" | sed 's/MULTIHARDLINK/HARDLINK/' | dircolors -b > /tmp/dircolors-$USER
-mv /tmp/dircolors-$USER "$HOME/.dircolors.old.compiled"
-dircolors -b "$HOME/.dircolors" > /tmp/dircolors-$USER
-mv /tmp/dircolors-$USER "$HOME/.dircolors.compiled"
-echo " done"
+if [ `which dircolors` ]; then
+  echo -n "Setting up dircolors..."
+  cat "$HOME/.dircolors.old" | sed 's/MULTIHARDLINK/HARDLINK/' | dircolors -b > /tmp/dircolors-$USER
+  mv /tmp/dircolors-$USER "$HOME/.dircolors.old.compiled"
+  dircolors -b "$HOME/.dircolors" > /tmp/dircolors-$USER
+  mv /tmp/dircolors-$USER "$HOME/.dircolors.compiled"
+  echo " done"
+fi
 
 echo -n "Setting up vim bundler..."
 mkdir -p "$HOME/.vim/bundle"
