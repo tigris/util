@@ -130,8 +130,8 @@ fi
 
 echo -n "Setting up vim bundler..."
 mkdir -p "$HOME/.vim/bundle"
-[ -d $HOME/.vim/bundle/vundle ] && rm -rf $HOME/.vim/bundle/vundle
-git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
+[ -d $HOME/.vim/bundle/vundle ] || git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
+cd $HOME/.vim/bundle/vundle && git pull origin master
 vim -c ':BundleInstall' -c ':quitall' .foo
 
 cd $OLDPWD
