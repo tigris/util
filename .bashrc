@@ -25,33 +25,16 @@ alias dmp='vim ~/junk/dmp'
 alias golf='vim ~/junk/golf'
 alias sql='vim ~/junk/dmp.sql'
 
-alias sshd='ssh doc.home.tigris.id.au'
-alias ssht='ssh tigris.id.au'
+alias sshd='ssh danial@doc.home.tigris.id.au'
+alias ssht='ssh danial@tigris.id.au'
 
 alias be='bundle exec'
 alias bi='bundle install'
 alias ber='bundle exec rake'
 alias my='mysql -u root'
 
-if [ `which vim` ]; then
-  alias vi='vim'
-  export EDITOR="vim"
-else
-  export EDITOR="vi"
-fi
-
 if [ -f "$HOME/.bash/term/$TERM" ]; then
   source "$HOME/.bash/term/$TERM"
-fi
-
-dircolors=`which dircolors > /dev/null`
-if [ -f "$HOME/.dircolors" -a "x$?" == "x0" ]; then
-  DIRCOLOR_VERSION=`dircolors --version | grep dircolors | awk '{ print $4 }' | cut -f1 -d'.'`
-  if [ $DIRCOLOR_VERSION == "7" ]; then
-    source $HOME/.dircolors.old.compiled
-  else
-    source $HOME/.dircolors.compiled
-  fi
 fi
 
 DISTRO=`uname`
@@ -62,6 +45,23 @@ fi
 SHORT_HOST=`hostname | sed 's/\..*//g'`
 if [ -f "$HOME/.bash/host/$SHORT_HOST" ]; then
   source "$HOME/.bash/host/$SHORT_HOST"
+fi
+
+if [ `which vim` ]; then
+  alias vi='vim'
+  export EDITOR="vim"
+else
+  export EDITOR="vi"
+fi
+
+dircolors=`which dircolors > /dev/null`
+if [ -f "$HOME/.dircolors" -a "x$?" == "x0" ]; then
+  DIRCOLOR_VERSION=`dircolors --version | grep dircolors | awk '{ print $4 }' | cut -f1 -d'.'`
+  if [ $DIRCOLOR_VERSION == "7" ]; then
+    source $HOME/.dircolors.old.compiled
+  else
+    source $HOME/.dircolors.compiled
+  fi
 fi
 
 # rvm
@@ -76,6 +76,16 @@ fi
 if [ -f "$HOME/.oldpwd" ]; then
   cd "`cat "$HOME/.oldpwd"`"
   rm -f "$HOME/.oldpwd"
+fi
+
+# chruby
+if [ -e /usr/local/opt/chruby/share/chruby/chruby.sh ]; then
+  source /usr/local/opt/chruby/share/chruby/chruby.sh
+fi
+
+# chruby auto switch
+if [ -e /usr/local/opt/chruby/share/chruby/auto.sh ]; then
+  source /usr/local/opt/chruby/share/chruby/auto.sh
 fi
 
 export PATH="$HOME/bin:$PATH"

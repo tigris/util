@@ -1,10 +1,8 @@
-export CLICOLOR=1
-export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-
-if [ -e /usr/local/opt/chruby/share/chruby/chruby.sh ]; then
-  source /usr/local/opt/chruby/share/chruby/chruby.sh
-fi
-
-if [ -e /usr/local/opt/chruby/share/chruby/auto.sh ]; then
-  source /usr/local/opt/chruby/share/chruby/auto.sh
+if [ `which gls` ]; then
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  alias ls='ls --color=auto'
+else
+  export CLICOLOR=1
+  export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 fi

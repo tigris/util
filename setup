@@ -90,6 +90,10 @@ if [ "x$fc_cache" == "x0" ]; then
     mateconftool-2 --set "/apps/mate-terminal/profiles/Default/font" --type string "Droid Sans Mono Dotted 9"
     echo " done"
   fi
+elif [ -d ~/Library/Fonts ]; then
+  echo -n "Installing custom fonts..."
+  ln -sf ~/git/util/fonts ~/Library/Fonts/custom
+  echo " done"
 else
   echo "No fc-cache, skipping custom font installation."
 fi
