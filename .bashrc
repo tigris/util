@@ -1,5 +1,9 @@
 if [ -f "/etc/bash.bashrc" ]; then
-    source "/etc/bash.bashrc"
+  source "/etc/bash.bashrc"
+fi
+
+if [ -f "$HOME/.bashrc.private" ]; then
+  source "$HOME/.bashrc.private"
 fi
 
 umask 002
