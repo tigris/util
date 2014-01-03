@@ -92,7 +92,7 @@ if [ "x$fc_cache" == "x0" ]; then
   fi
 elif [ -d ~/Library/Fonts ]; then
   echo -n "Installing custom fonts..."
-  ln -sf ~/git/util/fonts ~/Library/Fonts/custom
+  [ -e ~/Library/Fonts/custom ] || ln -sf ~/git/util/fonts ~/Library/Fonts/custom
   echo " done"
 else
   echo "No fc-cache, skipping custom font installation."
