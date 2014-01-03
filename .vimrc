@@ -16,6 +16,7 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'mileszs/ack.vim'
+Bundle 'kchmck/vim-coffee-script'
 
 function GitBlame() range
   execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
