@@ -1,4 +1,3 @@
---all
 --ignore-dir=gems
 --ignore-dir=.bundle
 --ignore-dir=data
@@ -8,3 +7,4 @@
 --ignore-dir=spec/coverage
 --ignore-dir=reports
 --ignore-dir=log
+--ignore-dir=.idea
