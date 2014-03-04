@@ -8,3 +8,4 @@
 --ignore-dir=reports
 --ignore-dir=log
 --ignore-dir=.idea
+--ignore-dir=vendor/ruby
