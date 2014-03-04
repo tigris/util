@@ -10,6 +10,7 @@ umask 002
 set -o ignoreeof
 
 export PAGER="less -eRiXF"
+export GPG_TTY=`tty`
 
 unset MAIL
 unset MAILCHECK
