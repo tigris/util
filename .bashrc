@@ -93,4 +93,5 @@ if [ -e /usr/local/opt/chruby/share/chruby/auto.sh ]; then
   source /usr/local/opt/chruby/share/chruby/auto.sh
 fi
 
-export PATH="$HOME/bin:$PATH"
+NPMBIN=`npm -g bin`
+export PATH="$NPMBIN:$HOME/bin:$PATH"
