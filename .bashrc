@@ -38,6 +38,15 @@ alias bi='bundle install'
 alias ber='bundle exec rake'
 alias my='mysql -u root'
 
+# Git stuff cos I'm lazier than a sloth
+alias gp='git pull --rebase'
+alias gr='git rebase'
+alias gs='git status'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias ga='git add'
+alias gc='git commit'
+
 if [ -f "$HOME/.bash/term/$TERM" ]; then
   source "$HOME/.bash/term/$TERM"
 fi
