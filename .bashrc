@@ -40,6 +40,7 @@ alias my='mysql -u root'
 
 # Git stuff cos I'm lazier than a sloth
 alias gp='git pull --rebase'
+alias gpush='git push'
 alias gr='git rebase'
 alias gs='git status'
 alias gd='git diff'
