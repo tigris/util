@@ -105,7 +105,7 @@ fi
 
 export PATH="$HOME/bin:$PATH"
 
-NPMBIN=`npm -g bin`
+NPMBIN=`npm -g bin 2>/dev/null`
 if [ "x$NPMBIN" != "x" ]; then
   export PATH="$NPMBIN:$PATH"
 fi
