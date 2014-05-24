@@ -5,6 +5,7 @@
 --ignore-dir=target
 --ignore-dir=spec/reports
 --ignore-dir=spec/coverage
+--ignore-dir=coverage
 --ignore-dir=reports
 --ignore-dir=log
 --ignore-dir=.idea
