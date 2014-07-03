@@ -104,7 +104,14 @@ if [ -e /usr/local/opt/chruby/share/chruby/auto.sh ]; then
   source /usr/local/opt/chruby/share/chruby/auto.sh
 fi
 
-export PATH="$HOME/bin:$PATH"
+# Path fixes
+if [ -z "$(echo $PATH | grep /usr/local/sbin)" ]; then
+  export PATH="/usr/local/sbin:$PATH"
+fi
+
+if [ -z "$(echo $PATH | grep $HOME/bin)" ]; then
+  export PATH="$HOME/bin:$PATH"
+fi
 
 NPMBIN=`npm -g bin 2>/dev/null`
 if [ "x$NPMBIN" != "x" ]; then
