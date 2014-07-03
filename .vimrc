@@ -17,6 +17,8 @@ Bundle 'vim-scripts/ZoomWin'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'mileszs/ack.vim'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'elzr/vim-json'
+Bundle 'jnwhiteh/vim-golang'
 
 function GitBlame() range
   execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
@@ -129,6 +131,7 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
      map ,a    :call GitBlame()<cr>
      map ,s    :!ispell %<cr>
      map ,r    :!%<cr>
+     map ,j    :.,$!jsonlint<cr>
      map ,n    :call ToggleLineNumbers()<cr>
      map <c-s> :w<cr>
      map <c-a> ggVG
