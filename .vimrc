@@ -131,7 +131,7 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
      map ,a    :call GitBlame()<cr>
      map ,s    :!ispell %<cr>
      map ,r    :!%<cr>
-     map ,j    :.,$!jsonlint<cr>
+     map ,j    mj:0,$!jsonlint<cr>'j
      map ,n    :call ToggleLineNumbers()<cr>
      map <c-s> :w<cr>
      map <c-a> ggVG
