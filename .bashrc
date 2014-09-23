@@ -30,7 +30,7 @@ alias dmp='vim ~/junk/dmp'
 alias golf='vim ~/junk/golf'
 alias sql='vim ~/junk/dmp.sql'
 
-alias sshd='ssh danial@doc.home.tigris.id.au'
+alias sshd='ssh -p 28 danial@doc.home.tigris.id.au'
 alias ssht='ssh danial@tigris.id.au'
 
 alias be='bundle exec'
