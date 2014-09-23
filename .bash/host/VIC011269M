@@ -1,0 +1,6 @@
+export AWS_CLI=`which aws`
+export IDP_USER=dpearce
+export IDP_HOST=idp.realestate.com.au
+export AWS_DEFAULT_ROLE=IS-Dev-Administrator
+export AWS_REGION=ap-southeast-2
+source ~/git/saml-aws-functions/bash-functions
