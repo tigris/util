@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+Dir['*'].each do |dir|
+  dir = dir.sub(/\//, '')
+  next unless File.directory?(dir)
+
+  Dir.chdir(dir) do
+
+    movie = Dir["**/*.{avi,mkv,mp4}"]
+
+    if movie.size > 1
+      $stderr.puts "Too many movies: #{dir}"
+      next
+    end
+
+    if movie.empty?
+      $stderr.puts "No movie? #{dir}"
+      next
+    end
+
+    movie = movie.first
+    extension = movie.sub(/^.*\.([^.]+)$/, '\1')
+
+    if movie =~ /\(3d\)/
+      puts %Q{mv "#{dir}/#{movie}" "#{dir.sub(/\(/, '(3d) (')}.#{extension}"}
+    else
+      puts %Q{mv "#{dir}/#{movie}" "#{dir}.#{extension}"}
+    end
+
+    puts %Q{rmdir "#{dir}"}
+
+  end
+end
+
+
+# if [[ ${1} =~ ^/ ]]; then
+#   FULL=$1
+# else
+#   FULL="./${1}"
+# fi
+#
+# DIR=${FULL%/*}
+# BASE=$(basename "$FULL")
+# FILE=$(basename "$(find "${DIR}/${BASE}" -name \*.mkv -o -name \*.avi -o -name \*.mp4)")
+#
+# echo $FILE
+
+# mkdir -p "$DIR/$BASE"
+# mv "$FULL" "$DIR/$BASE/${NEW}.${EXT}"
+
+# if [ -f "${DIR}/${BASE}.xml" ]; then mv "${DIR}/${BASE}.xml" "${DIR}/$BASE/${NEW}.xml"; fi
+# if [ -f "${DIR}/${BASE}.metathumb" ]; then mv "${DIR}/${BASE}.metathumb" "${DIR}/$BASE/${NEW}.metathumb"; fi
+# if [ -d "${DIR}/.${BASE}.backdrop" ]; then mv "${DIR}/.${BASE}.backdrop" "${DIR}/$BASE/.${NEW}.backdrop"; fi
