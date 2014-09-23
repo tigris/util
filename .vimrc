@@ -144,6 +144,7 @@ set encoding=utf-8
 set title
 
 let g:EasyMotion_leader_key = '\'
+let g:vim_json_syntax_conceal = 0
 
 syntax enable
 let g:solarized_termcolors = 16
