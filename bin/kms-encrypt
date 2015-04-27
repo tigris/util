@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+aws kms encrypt           \
+  --key-id ${1}           \
+  --plaintext $(cat ${2}) \
+  --query CiphertextBlob  \
+  --output text | base64 --decode
