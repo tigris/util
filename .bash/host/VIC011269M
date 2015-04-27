@@ -1,6 +1,7 @@
-export AWS_CLI=`which aws`
-export IDP_USER=dpearce
-export IDP_HOST=idp.realestate.com.au
-export AWS_DEFAULT_ROLE=IS-Dev-Administrator
 export AWS_REGION=ap-southeast-2
 source ~/git/saml-aws-functions/bash-functions
+alias awsprod="authenticate -u dpearce -h idp.realestate.com.au -r IS-Prod-Administrator"
+alias awsqa="authenticate -u dpearce -h idp.realestate.com.au -r IS-QA-Administrator"
+alias awsdev="authenticate -u dpearce -h idp.realestate.com.au -r IS-Dev-Administrator"
+
+eval "$(boot2docker shellinit 2>/dev/null)"
