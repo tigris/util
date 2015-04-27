@@ -22,6 +22,7 @@ alias x='exit'
 alias sl='ls' # How lazy am i? ;-)
 alias dc='cd' # I never could figure out that shit calculator anyway
 
+alias chmox='chmod +x'
 alias rgrep='grep -r'
 alias diff='diff -u'
 alias less=$PAGER # don't use .lesskey, it screws your git paging/coloring!
