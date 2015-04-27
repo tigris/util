@@ -9,6 +9,11 @@ fi
 umask 002
 set -o ignoreeof
 
+shopt -s histappend
+HISTCONTROL=ignoreboth
+HISTIGNORE="pwd:ls:ls -l:ls -la:l:history"
+HISTTIMEFORMAT='%F %T '
+
 export PAGER="less -eRiXF"
 export GPG_TTY=`tty`
 
