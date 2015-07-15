@@ -14,7 +14,7 @@ cursor_color() {
 
 print_aws_info() {
   if [ "x${AWS_ROLE}" != "x" ]; then
-    expired=$(if [ ${EXPIRE} -lt $(date +'%s') ]; then echo "*"; fi)
+    expired=$(if [ ${AWS_EXPIRE} -lt $(date +'%s') ]; then echo "*"; fi)
     role=$(echo ${AWS_ROLE} | tr '[A-Z]' '[a-z]')
     echo -n "{${role}}$expired"
   fi
