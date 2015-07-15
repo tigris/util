@@ -7,5 +7,6 @@ alias deploy="bundle exec cd-shipper deploy"
 alias awsprod="authenticate -u dpearce -h idp.realestate.com.au -r IS-Prod-Administrator"
 alias awsqa="authenticate -u dpearce -h idp.realestate.com.au -r IS-QA-Administrator"
 alias awsdev="authenticate -u dpearce -h idp.realestate.com.au -r IS-Dev-Administrator"
+alias awscushy="source ~/.aws-cushycms"
 
 eval "$(boot2docker shellinit 2>/dev/null)"
