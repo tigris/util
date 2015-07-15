@@ -10,3 +10,5 @@
 --ignore-dir=log
 --ignore-dir=.idea
 --ignore-dir=vendor/ruby
+--ignore-dir=src/vendor/ruby
+--ignore-dir=tmp/cache/assets/development
