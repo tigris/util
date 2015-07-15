@@ -1,3 +1,4 @@
+export PASSWDCMD="security find-generic-password -s 'com.apple.network.eap.user.item.wlan.ssid.REALaptop' -w"
 export AWS_REGION=ap-southeast-2
 source ~/git/saml-aws-functions/bash-functions
 alias stahp="bundle exec cd-shipper stop"
