@@ -55,6 +55,8 @@ alias gdc='git diff --cached'
 alias ga='git add'
 alias gc='git commit'
 
+alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+
 if [ -f "$HOME/.bash/term/$TERM" ]; then
   source "$HOME/.bash/term/$TERM"
 fi
