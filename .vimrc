@@ -19,6 +19,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'elzr/vim-json'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'godlygeek/tabular'
 
 function GitBlame() range
   execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
@@ -133,6 +134,7 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
      map ,r    :!%<cr>
      map ,j    mj:0,$!jq .<cr>'j
      map ,n    :call ToggleLineNumbers()<cr>
+     map ,t    :Tabularize/\(:.*\)\@<!:\zs /l0<cr>
      map <c-s> :w<cr>
      map <c-a> ggVG
      map <c-q> :q<cr>
