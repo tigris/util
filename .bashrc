@@ -56,6 +56,7 @@ alias ga='git add'
 alias gc='git commit'
 
 alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+alias dm='docker-machine'
 
 if [ -f "$HOME/.bash/term/$TERM" ]; then
   source "$HOME/.bash/term/$TERM"
