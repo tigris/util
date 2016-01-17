@@ -9,6 +9,9 @@
 --ignore-dir=reports
 --ignore-dir=log
 --ignore-dir=.idea
+--ignore-dir=vendor/jruby
+--ignore-dir=src/vendor/jruby
 --ignore-dir=vendor/ruby
 --ignore-dir=src/vendor/ruby
 --ignore-dir=tmp/cache/assets/development
+--ignore-dir=.lambda_packager
