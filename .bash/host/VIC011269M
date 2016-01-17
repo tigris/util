@@ -9,4 +9,4 @@ alias awsqa="authenticate -u dpearce -h idp.realestate.com.au -r IS-QA-Administr
 alias awsdev="authenticate -u dpearce -h idp.realestate.com.au -r IS-Dev-Administrator"
 alias awscushy="source ~/.aws-cushycms"
 
-eval "$(docker-machine env docker-vm)"
+eval "$(docker-machine env default)"
