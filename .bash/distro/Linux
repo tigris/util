@@ -10,6 +10,5 @@ alias ack='ack-grep'
 alias vless='/usr/share/vim/vim72/macros/less.sh'
 
 if [ "$TERM" -a "x$TERM" != "xdumb" ]; then
-  which setterm > /dev/null && setterm -blength 0 # no system beeps
   stty -ixon # i want my ctrl-s for other things
 fi
