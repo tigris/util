@@ -9,6 +9,7 @@ ln -sf ~/git/util/.bashrc ~
 ln -sf ~/git/util/.bash_profile ~
 ln -sf ~/git/util/.bash_logout ~
 ln -sf ~/git/util/.gemrc ~
+ln -sf ~/git/util/.railsrc ~
 ln -sf ~/git/util/.vimrc ~
 echo " done"
 

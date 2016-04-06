@@ -1,0 +1,5 @@
+--skip-spring
+--skip-turbolinks
+--skip-test-unit
+--database postgresql
+--template ~/git/util/rails-template.rb
