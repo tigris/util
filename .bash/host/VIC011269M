@@ -1,12 +1,11 @@
-export PASSWDCMD="security find-generic-password -s 'com.apple.network.eap.user.item.wlan.ssid.REALaptop' -w"
 export AWS_REGION=ap-southeast-2
 source ~/git/saml-aws-functions/bash-functions
 alias stahp="bundle exec cd-shipper stop"
 alias trigger="bundle exec cd-shipper trigger"
 alias deploy="bundle exec cd-shipper deploy"
-alias awsprod="authenticate -u dpearce -h idp.realestate.com.au -r IS-Prod-Administrator"
-alias awsqa="authenticate -u dpearce -h idp.realestate.com.au -r IS-QA-Administrator"
-alias awsdev="authenticate -u dpearce -h idp.realestate.com.au -r IS-Dev-Administrator"
+alias awsprod="authenticate -u dpearce -r IS-Prod-Administrator"
+alias awsqa="authenticate -u dpearce -r IS-QA-Administrator"
+alias awsdev="authenticate -u dpearce -r IS-Dev-Administrator"
 alias awscushy="source ~/.aws-cushycms"
 
 eval "$(docker-machine env default)"
