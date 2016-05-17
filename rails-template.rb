@@ -8,17 +8,13 @@ environment 'config.action_mailer.default_url_options = { host: \'localhost:3000
 run 'rm -f README.rdoc'
 run 'touch README.md'
 
-# CSS? LOL!
-scss = %Q(@import "*";\n)
-run "echo '#{scss}' >> app/assets/stylesheets/application.scss"
-run 'rm -f app/assets/stylesheets/application.css'
-
 # ERB is for chumps
 gem 'slim'
 gem 'slim-rails'
 
 # I'm lazy
 gem 'twitter-bootstrap-rails'
+gem 'simple_form'
 
 devise = yes?('Use devise? ')
 gem 'devise' if devise
@@ -35,6 +31,8 @@ gem_group :development, :test do
   # IRB is for chumps
   gem 'pry'
   gem 'pry-rails'
+
+  gem 'html2slim'
 end
 
 run 'bundle install'
@@ -64,12 +62,22 @@ if devise
   generate 'devise:install'
   generate 'devise user'
   generate 'devise:views'
+  run 'erb2slim -d app/views/devise/'
   rake 'db:migrate'
 end
 
 # Layout
 run 'rm -f app/views/layouts/application.html.erb'
+generate 'bootstrap:install static'
 generate 'bootstrap:layout application'
+
+# CSS? LOL!
+scss = %Q(@import "*";\n)
+run "echo '#{scss}' >> app/assets/stylesheets/application.scss"
+run 'rm -f app/assets/stylesheets/application.css'
+scss = %Q(@import "twitter-bootstrap-static/bootstrap";\n@import "twitter-bootstrap-static/fontawesome";\n)
+run "echo '#{scss}' >> app/assets/stylesheets/bootstrap_and_overrides.scss"
+run 'rm -f app/assets/stylesheets/bootstrap_and_overrides.css'
 
 # Git
 git :init
