@@ -12,6 +12,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-fugitive'
+Bundle 'slim-template/vim-slim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'Lokaltog/vim-easymotion'
