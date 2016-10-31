@@ -43,6 +43,7 @@ alias be='bundle exec'
 alias bi='bundle install'
 alias bu='bundle update'
 alias ber='bundle exec rake'
+alias bera='bundle exec rubocop -a'
 alias my='mysql -u root'
 
 # Git stuff cos I'm lazier than a sloth
