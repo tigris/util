@@ -117,6 +117,10 @@ if [ -e /usr/local/opt/chruby/share/chruby/auto.sh ]; then
   source /usr/local/opt/chruby/share/chruby/auto.sh
 fi
 
+if [ -e /etc/profile.d/chruby.sh ]; then
+  source /etc/profile.d/chruby.sh
+fi
+
 # Path fixes
 if [ -z "$(echo $PATH | grep /usr/local/sbin)" ]; then
   export PATH="/usr/local/sbin:$PATH"
