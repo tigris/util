@@ -12,3 +12,6 @@ alias vless='/usr/share/vim/vim72/macros/less.sh'
 if [ "$TERM" -a "x$TERM" != "xdumb" ]; then
   stty -ixon # i want my ctrl-s for other things
 fi
+
+alias pbcopy="xclip -selection c"
+alias pbpaste="xclip -selection clipboard -o"
