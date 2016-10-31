@@ -1,6 +1,6 @@
 export REA_LDAP_USER=dpearce
 export AWS_REGION=ap-southeast-2
-source ~/git/saml-aws-functions/bash-functions
+export AWS_DEFAULT_REGION=ap-southeast-2
 alias stahp="bundle exec cd-shipper stop"
 alias trigger="bundle exec cd-shipper trigger"
 alias deploy="bundle exec cd-shipper deploy"
@@ -8,8 +8,7 @@ alias awsprod="authenticate -u dpearce -r IS-Prod-Administrator"
 alias awsqa="authenticate -u dpearce -r IS-QA-Administrator"
 alias awsdev="authenticate -u dpearce -r IS-Dev-Administrator"
 alias awscushy="source ~/.aws-cushycms"
+alias aws_reset="unset AWS_SECRET_ACCESS_KEY; unset AWS_ACCESS_KEY_ID; export AWS_DEFAULT_REGION=ap-southeast-2; export AWS_REGION=ap-southeast-2"
 alias inprod="rea-as saml IS-Prod-Administrator"
 alias inqa="rea-as saml IS-QA-Administrator"
 alias indev="rea-as saml IS-Dev-Administrator"
-
-eval "$(docker-machine env default)"
