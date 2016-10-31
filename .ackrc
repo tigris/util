@@ -13,5 +13,5 @@
 --ignore-dir=src/vendor/jruby
 --ignore-dir=vendor/ruby
 --ignore-dir=src/vendor/ruby
---ignore-dir=tmp/cache/assets/development
 --ignore-dir=.lambda_packager
+--ignore-dir=tmp/cache/assets/
