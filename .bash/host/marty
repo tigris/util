@@ -12,3 +12,4 @@ alias aws_reset="unset AWS_SECRET_ACCESS_KEY; unset AWS_ACCESS_KEY_ID; export AW
 alias inprod="rea-as saml IS-Prod-Administrator"
 alias inqa="rea-as saml IS-QA-Administrator"
 alias indev="rea-as saml IS-Dev-Administrator"
+alias vim="gvim -v"
