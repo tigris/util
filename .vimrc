@@ -140,6 +140,8 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
      map <c-a> ggVG
      map <c-q> :q<cr>
      map <c-x> :x<cr>
+     map ,p    "+p
+     map ,y    "+y
      map <space> <c-w>
 vnoremap p     <esc>:let current_reg = @"<cr>gvdi<c-r>=current_reg<cr><esc>
 
