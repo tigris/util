@@ -56,6 +56,9 @@ alias gdc='git diff --cached'
 alias ga='git add'
 alias gc='git commit'
 
+# docker docker docker
+alias dr='docker run --rm -it'
+
 alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias dm='docker-machine'
 
