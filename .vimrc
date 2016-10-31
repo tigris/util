@@ -115,7 +115,7 @@ set number
 autocmd BufNewFile,BufRead,BufEnter *.thor     set filetype=ruby
 autocmd BufReadPost                 *          if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 autocmd vimenter * if !argc() | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
     imap ;;    <esc>
     imap <c-s> <c-o><c-s>
