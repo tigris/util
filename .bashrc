@@ -55,6 +55,7 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 alias ga='git add'
 alias gc='git commit'
+alias hub="xdg-open \`git remote -v | grep fetch | head -n1 | cut -f2 | cut -f1 -d' ' | sed 's|:|/|' | sed 's|^.*@|https://|'\` > /dev/null"
 
 # docker docker docker
 alias dr='docker run --rm -it'
