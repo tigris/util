@@ -14,8 +14,10 @@ alias evprod-admin="rea-as saml Eventus-Prod-Administrator"
 alias inprod="rea-as saml IS-Prod-NormalUser"
 alias inprod-admin="rea-as saml IS-Prod-Administrator"
 
-alias inqa="rea-as saml IS-QA-NormalUser"
+alias inqa="rea-as saml IS-QA-Administrator"
 alias inqa-admin="rea-as saml IS-QA-Administrator"
 
 alias indev="rea-as saml IS-Dev-NormalUser"
 alias indev-admin="rea-as saml IS-Dev-Administrator"
+
+alias evdev="rea-as saml Eventus-Dev-NormalUser"
