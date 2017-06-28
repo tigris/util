@@ -80,8 +80,20 @@ function ToggleLineNumbers()
   else
     set number
   endif
-  echo ''
   return ''
+  echo ''
+endfunction
+
+function ToggleShowSpecialChars()
+  if (&list)
+    set nolist
+    set noexpandtab
+  else
+    set list
+    set expandtab
+  endif
+  return ''
+  echo ''
 endfunction
 
 filetype plugin indent on
@@ -114,11 +126,13 @@ set number
 
 "autocmd BufNewFile,BufRead,BufEnter *.html.erb set filetype=html
 autocmd BufNewFile,BufRead,BufEnter *.thor     set filetype=ruby
+autocmd BufRead,BufNewFile          *.scala    set filetype=scala
+autocmd BufRead,BufNewFile          *.sbt      set filetype=scala
 autocmd BufReadPost                 *          if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-    imap ;;    <esc>
+    imap ,,    <esc>
     imap <c-s> <c-o><c-s>
     imap <c-s> <esc><c-s>
     imap <c-q> <esc><c-q>
@@ -137,6 +151,7 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
      map ,j    mj:0,$!jq .<cr>'j
      map ,n    :call ToggleLineNumbers()<cr>
      map ,t    :Tabularize/\(:.*\)\@<!:\zs /l0<cr>
+     map ,T    :call ToggleShowSpecialChars()<cr>
      map <c-s> :w<cr>
      map <c-a> ggVG
      map <c-q> :q<cr>
