@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Make sure we have an ubuntu image
+TAG=$(docker images ubuntu:latest -q)
+if [ "${TAG}" == "" ]; then
+  docker pull ubuntu > /dev/null
+fi
+
+THRESHOLD=5 # seconds
+LOCAL=$(gdate '+%s')
+DOCKER=$(docker run --rm ubuntu date '+%s')
+UPPER_THRESHOLD=$((LOCAL + THRESHOLD))
+LOWER_THRESHOLD=$((LOCAL - THRESHOLD))
+
+if [ ${DOCKER} -gt ${UPPER_THRESHOLD} -o ${DOCKER} -lt ${LOWER_THRESHOLD} ]; then
+  echo "Your docker clock has drifted too far! ... Restarting docker"
+  osascript -e 'quit app "Docker"'
+  open -a Docker
+fi
+
+echo "All good."
+
+exit 0
