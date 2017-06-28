@@ -21,6 +21,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'elzr/vim-json'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'godlygeek/tabular'
+Bundle 'derekwyatt/vim-scala'
 
 function GitBlame() range
   execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
