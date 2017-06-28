@@ -59,9 +59,12 @@ alias hub="xdg-open \`git remote -v | grep fetch | head -n1 | cut -f2 | cut -f1 
 
 # docker docker docker
 alias dr='docker run --rm -it'
+alias drm='docker run --rm -it -v ${PWD}:/cwd -w /cwd'
+alias dcu='docker-compose up --abort-on-container-exit --build'
+alias dcd='docker-compose down'
+alias dcr='docker-compose run --rm'
 
 alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-alias dm='docker-machine'
 
 if [ -f "$HOME/.bash/term/$TERM" ]; then
   source "$HOME/.bash/term/$TERM"
