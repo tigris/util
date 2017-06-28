@@ -1,12 +1,11 @@
 export REA_LDAP_USER=dpearce
 export AWS_REGION=ap-southeast-2
 export AWS_DEFAULT_REGION=ap-southeast-2
-alias stahp="bundle exec cd-shipper stop"
-alias trigger="bundle exec cd-shipper trigger"
-alias deploy="bundle exec cd-shipper deploy"
+export PATH="${PATH}:/usr/local/go/bin:${HOME}/go/bin"
+export GOPATH="${HOME}/go"
+
 alias awscushy="source ~/.aws-cushycms"
 alias aws_reset="unset AWS_SECRET_ACCESS_KEY; unset AWS_ACCESS_KEY_ID; export AWS_DEFAULT_REGION=ap-southeast-2; export AWS_REGION=ap-southeast-2"
-alias vim="gvim -v"
 
 alias evprod="rea-as saml Eventus-Prod-NormalUser"
 alias evprod-admin="rea-as saml Eventus-Prod-Administrator"
@@ -21,3 +20,10 @@ alias indev="rea-as saml IS-Dev-NormalUser"
 alias indev-admin="rea-as saml IS-Dev-Administrator"
 
 alias evdev="rea-as saml Eventus-Dev-NormalUser"
+
+alias incbde="rea-as saml cbde-Developer"
+alias incbde-admin="rea-as saml cbde-Administrator"
+
+alias incpdev="rea-as saml cpdev-Developer"
+
+alias inmuppets='rea-as saml Muppets-Dev-Role'
