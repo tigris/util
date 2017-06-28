@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+require 'json'
+require 'yaml'
+
+in_file  = ARGV[0]
+out_file = in_file.sub(/\.yml$/, '') + '.json'
+
+File.open(out_file, 'w'){|f| f.puts YAML.load(File.read(in_file)).to_json }
