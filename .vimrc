@@ -145,10 +145,12 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
      map ,5    :call ToggleBackground()<cr>
      map ,6    :call ToggleHLSearch()<cr>
      map ,7    :call ToggleSyntax()<cr>
-     map ,a    :call GitBlame()<cr>
+     map gb    :call GitBlame()<cr>
+     map gd    :!git diff %<cr>
      map ,s    :!ispell %<cr>
      map ,r    :!%<cr>
      map ,j    mj:0,$!jq .<cr>'j
+     map ,x    mx:0,$!xmllint --format -<cr>'x
      map ,n    :call ToggleLineNumbers()<cr>
      map ,t    :Tabularize/\(:.*\)\@<!:\zs /l0<cr>
      map ,T    :call ToggleShowSpecialChars()<cr>
