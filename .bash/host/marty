@@ -27,3 +27,5 @@ alias incbde-admin="rea-as saml cbde-Administrator"
 alias incpdev="rea-as saml cpdev-Developer"
 
 alias inmuppets='rea-as saml Muppets-Dev-Role'
+
+alias intraining='rea-as saml REA-Training-User'
