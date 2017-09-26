@@ -143,5 +143,5 @@ if [ "x$NPMBIN" != "x" ]; then
   export PATH="$NPMBIN:$PATH"
 fi
 
-alias ruby2.3='docker pull ruby:2.3 >/dev/null ; docker volume create --name ruby2.3-bundle-cache >/dev/null ; docker run --rm -v ruby2.3-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.3 bash -c "[[ -f Gemfile ]] && (bundle check >/dev/null || bundle install)" ; docker run --rm -v ruby2.3-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.3'
-alias ruby2.4='docker pull ruby:2.4 >/dev/null ; docker volume create --name ruby2.4-bundle-cache >/dev/null ; docker run --rm -v ruby2.4-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.4 bash -c "[[ -f Gemfile ]] && (bundle check >/dev/null || bundle install)" ; docker run --rm -v ruby2.4-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.4'
+alias ruby2.3='docker pull ruby:2.3 >/dev/null ; docker volume create --name ruby2.3-bundle-cache >/dev/null ; docker run --rm -v ruby2.3-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.3 bash -c "[[ -f Gemfile ]] && (bundle check >/dev/null || bundle install)" ; docker run --rm -v ruby2.3-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd -it ruby:2.3'
+alias ruby2.4='docker pull ruby:2.4 >/dev/null ; docker volume create --name ruby2.4-bundle-cache >/dev/null ; docker run --rm -v ruby2.4-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.4 bash -c "[[ -f Gemfile ]] && (bundle check >/dev/null || bundle install)" ; docker run --rm -v ruby2.4-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd -it ruby:2.4'
