@@ -96,6 +96,14 @@ function ToggleShowSpecialChars()
   echo ''
 endfunction
 
+function ToggleNerdTree()
+  if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+    NERDTreeToggle
+  else
+    NERDTreeFind
+  end
+endfunction
+
 filetype plugin indent on
 
 set list
@@ -139,7 +147,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
     imap <c-x> <esc><c-x>
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
     imap <c-n> <esc><c-n>
-     map <c-n> :NERDTreeToggle<cr>
+     map <c-n> :call ToggleNerdTree()<cr>
      map ,2    :call TogglePaste()<cr>
      map ,4    :call ToggleFoldmethod()<cr>
      map ,5    :call ToggleBackground()<cr>
