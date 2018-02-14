@@ -2,9 +2,7 @@ if [ -f "/etc/bash.bashrc" ]; then
   source "/etc/bash.bashrc"
 fi
 
-if [ -f "$HOME/.bashrc.private" ]; then
-  source "$HOME/.bashrc.private"
-fi
+alias private='source "$HOME/.bashrc.private"'
 
 umask 002
 set -o ignoreeof
@@ -26,6 +24,8 @@ alias x='exit'
 
 alias sl='ls' # How lazy am i? ;-)
 alias dc='cd' # I never could figure out that shit calculator anyway
+alias c.='cd ..'
+alias c-='cd -'
 
 alias chmox='chmod +x'
 alias rgrep='grep -r'
@@ -56,15 +56,21 @@ alias gdc='git diff --cached'
 alias ga='git add'
 alias gc='git commit'
 alias hub="xdg-open \`git remote -v | grep fetch | head -n1 | cut -f2 | cut -f1 -d' ' | sed 's|:|/|' | sed 's|^.*@|https://|'\` >/dev/null"
+alias realowner="git log | grep Author | cut -d':' -f2 | cut -d'<' -f1 | sort | uniq -c | sort -rn | head -n1"
 
 # docker docker docker
-alias dr='docker run --rm -it'
-alias drm='docker run --rm -it -v ${PWD}:/cwd -w /cwd'
+alias d='docker'
+
 alias dcu='docker-compose up --abort-on-container-exit --build'
 alias dcd='docker-compose down'
 alias dcr='docker-compose run --rm'
 
 alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+
+export SHORT_HOSTNAME=`hostname -s`
+if [ -f "$HOME/.bash/host/$SHORT_HOSTNAME" ]; then
+  source "$HOME/.bash/host/$SHORT_HOSTNAME"
+fi
 
 if [ -f "$HOME/.bash/term/$TERM" ]; then
   source "$HOME/.bash/term/$TERM"
@@ -73,11 +79,6 @@ fi
 DISTRO=`uname`
 if [ -f "$HOME/.bash/distro/$DISTRO" ]; then
   source "$HOME/.bash/distro/$DISTRO"
-fi
-
-SHORT_HOST=`hostname | sed 's/\..*//g'`
-if [ -f "$HOME/.bash/host/$SHORT_HOST" ]; then
-  source "$HOME/.bash/host/$SHORT_HOST"
 fi
 
 if [ `which vim` ]; then
@@ -143,5 +144,5 @@ if [ "x$NPMBIN" != "x" ]; then
   export PATH="$NPMBIN:$PATH"
 fi
 
-alias ruby2.3='docker pull ruby:2.3 >/dev/null ; docker volume create --name ruby2.3-bundle-cache >/dev/null ; docker run --rm -v ruby2.3-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.3 bash -c "[[ -f Gemfile ]] && (bundle check >/dev/null || bundle install)" ; docker run --rm -v ruby2.3-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd -it ruby:2.3'
-alias ruby2.4='docker pull ruby:2.4 >/dev/null ; docker volume create --name ruby2.4-bundle-cache >/dev/null ; docker run --rm -v ruby2.4-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.4 bash -c "[[ -f Gemfile ]] && (bundle check >/dev/null || bundle install)" ; docker run --rm -v ruby2.4-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd -it ruby:2.4'
+alias ruby2.3='docker pull ruby:2.3 >/dev/null ; docker volume create --name ruby2.3-dan-bundle-cache >/dev/null ; docker run --rm -v ruby2.3-dan-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.3 bash -c "[[ -f Gemfile ]] && (bundle check >/dev/null || bundle install)" ; docker run --rm -v ruby2.3-dan-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd -it ruby:2.3'
+alias ruby2.4='docker pull ruby:2.4 >/dev/null ; docker volume create --name ruby2.4-dan-bundle-cache >/dev/null ; docker run --rm -v ruby2.4-dan-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.4 bash -c "[[ -f Gemfile ]] && (bundle check >/dev/null || bundle install)" ; docker run --rm -v ruby2.4-dan-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd -it ruby:2.4'
