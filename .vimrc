@@ -22,6 +22,7 @@ Bundle 'elzr/vim-json'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'ctrlpvim/ctrlp.vim'
 
 function GitBlame() range
   execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
@@ -168,6 +169,7 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
      map <c-x> :x<cr>
      map ,p    "+p
      map ,y    "+y
+     map ,f    :CtrlP<cr>
      map <space> <c-w>
 vnoremap p     <esc>:let current_reg = @"<cr>gvdi<c-r>=current_reg<cr><esc>
 
