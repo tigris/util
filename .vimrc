@@ -190,3 +190,4 @@ let g:solarized_contrast   = "normal"
 let g:solarized_visibility = "normal"
 colorscheme solarized
 set background=dark
+hi Normal guibg=black guifg=green

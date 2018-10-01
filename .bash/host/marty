@@ -32,3 +32,5 @@ alias intraining='rea-as saml REA-Training-User'
 
 alias rea-bk='docker run --rm -e BUILDKITE_API_TOKEN -e GITHUB_API_TOKEN registry.cowbell.realestate.com.au/dpearce/rea-buildkite-utils'
 
+alias slip="incpdev rea-slip-docker-login"
+
