@@ -23,6 +23,7 @@ Bundle 'jnwhiteh/vim-golang'
 Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'ctrlpvim/ctrlp.vim'
+Bundle 'patstockwell/vim-monokai-tasty'
 
 function GitBlame() range
   execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
@@ -188,6 +189,7 @@ let g:solarized_underline  = 1
 let g:solarized_italic     = 1
 let g:solarized_contrast   = "normal"
 let g:solarized_visibility = "normal"
-colorscheme solarized
+" colorscheme solarized
+colorscheme vim-monokai-tasty
 set background=dark
 hi Normal guibg=black guifg=green
