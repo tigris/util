@@ -18,9 +18,8 @@ echo -n "Symlinking custom bin files..."
 ln -sf ~/git/util/bin ~
 echo " done"
 
-echo -n "Setting up solorized color scheme for dircolors..."
-ln -sf ~/git/util/dircolors-solarized-dark ~/.dircolors
-ln -sf ~/git/util/dircolors-solarized-dark ~/.dircolors.old
+echo -n "Setting up monokai color scheme for dircolors..."
+ln -sf ~/git/util/dircolors-monokai ~/.dircolors
 echo " done"
 
 which xrdb > /dev/null
@@ -123,15 +122,6 @@ elif [ "x$xfce_term" == "x0" ]; then
   echo " done"
 else
   echo "No gnome, xfce or mate terminal, skipping terminal setup."
-fi
-
-if [ `which dircolors` ]; then
-  echo -n "Setting up dircolors..."
-  cat "$HOME/.dircolors.old" | sed 's/MULTIHARDLINK/HARDLINK/' | dircolors -b > /tmp/dircolors-$USER
-  mv /tmp/dircolors-$USER "$HOME/.dircolors.old.compiled"
-  dircolors -b "$HOME/.dircolors" > /tmp/dircolors-$USER
-  mv /tmp/dircolors-$USER "$HOME/.dircolors.compiled"
-  echo " done"
 fi
 
 echo -n "Setting up vim bundler..."

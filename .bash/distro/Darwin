@@ -2,6 +2,12 @@ if [ `which gls` ]; then
   PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
   alias ls='ls --color=auto'
+fi
+
+if [ `which gdircolors` ]; then
+  dircolors ~/.dircolors >/tmp/dircolors
+  source /tmp/dircolors
+  rm /tmp/dircolors
 else
   export CLICOLOR=1
   export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
