@@ -1,25 +1,8 @@
 export REA_LDAP_USER=dpearce
 export AWS_REGION=ap-southeast-2
 export AWS_DEFAULT_REGION=ap-southeast-2
-export PATH="${PATH}:/usr/local/go/bin:${HOME}/go/bin"
+export PATH="${PATH}:/usr/local/go/bin:${HOME}/go/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export GOPATH="${HOME}/go"
-
-alias awscushy="source ~/.aws-cushycms"
-alias aws_reset="unset AWS_SECRET_ACCESS_KEY; unset AWS_ACCESS_KEY_ID; export AWS_DEFAULT_REGION=ap-southeast-2; export AWS_REGION=ap-southeast-2"
-
-alias evprod="rea-as saml Eventus-Prod-NormalUser"
-alias evprod-admin="rea-as saml Eventus-Prod-Administrator"
-
-alias inprod="rea-as saml IS-Prod-NormalUser"
-alias inprod-admin="rea-as saml IS-Prod-Administrator"
-
-alias inqa="rea-as saml IS-QA-Administrator"
-alias inqa-admin="rea-as saml IS-QA-Administrator"
-
-alias indev="rea-as saml IS-Dev-NormalUser"
-alias indev-admin="rea-as saml IS-Dev-Administrator"
-
-alias evdev="rea-as saml Eventus-Dev-NormalUser"
 
 alias incbde="rea-as saml cbde-Developer"
 alias incbde-admin="rea-as saml cbde-Administrator"
@@ -28,9 +11,10 @@ alias incpdev="rea-as saml cpdev-Developer"
 
 alias inmuppets='rea-as saml Muppets-Dev-Role'
 
-alias intraining='rea-as saml REA-Training-User'
-
-alias rea-bk='docker run --rm -e BUILDKITE_API_TOKEN -e GITHUB_API_TOKEN registry.cowbell.realestate.com.au/dpearce/rea-buildkite-utils'
+alias intraining='rea-as saml Docker-Training-User'
 
 alias slip="incpdev rea-slip-docker-login"
 
+alias cowbell-ecr="\$(rea-as saml cpdev-Developer aws --region ap-southeast-2 ecr get-login --registry-ids 867471893442 --no-include-email)"
+alias update-bku='docker pull 867471893442.dkr.ecr.ap-southeast-2.amazonaws.com/cowbell/buildkite-utils:latest'
+alias bku='docker run --rm -e BUILDKITE_API_TOKEN -e GITHUB_API_TOKEN 867471893442.dkr.ecr.ap-southeast-2.amazonaws.com/cowbell/buildkite-utils'
