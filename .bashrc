@@ -36,8 +36,8 @@ alias dmp='vim ~/junk/dmp'
 alias golf='vim ~/junk/golf'
 alias sql='vim ~/junk/dmp.sql'
 
-alias sshd='ssh -p 28 danial@doc.home.tigris.id.au'
-alias ssht='ssh danial@tigris.id.au'
+alias sshd='ssh doc'
+alias ssht='ssh tigris'
 
 alias be='bundle exec'
 alias bi='bundle install'
@@ -88,13 +88,13 @@ else
 fi
 
 # rvm
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+# [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
-# rbenv
-if [ -d "$HOME/.rbenv" ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-fi
+# # rbenv
+# if [ -d "$HOME/.rbenv" ]; then
+#   export PATH="$HOME/.rbenv/bin:$PATH"
+#   eval "$(rbenv init -)"
+# fi
 
 if [ -f "$HOME/.oldpwd" ]; then
   cd "`cat "$HOME/.oldpwd"`"
@@ -132,6 +132,3 @@ NPMBIN=`npm -g bin 2>/dev/null`
 if [ "x$NPMBIN" != "x" ]; then
   export PATH="$NPMBIN:$PATH"
 fi
-
-alias ruby2.3='docker pull ruby:2.3 >/dev/null ; docker volume create --name ruby2.3-dan-bundle-cache >/dev/null ; docker run --rm -v ruby2.3-dan-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.3 bash -c "[[ -f Gemfile ]] && (bundle check >/dev/null || bundle install)" ; docker run --rm -v ruby2.3-dan-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd -it ruby:2.3'
-alias ruby2.4='docker pull ruby:2.4 >/dev/null ; docker volume create --name ruby2.4-dan-bundle-cache >/dev/null ; docker run --rm -v ruby2.4-dan-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd ruby:2.4 bash -c "[[ -f Gemfile ]] && (bundle check >/dev/null || bundle install)" ; docker run --rm -v ruby2.4-dan-bundle-cache:/usr/local/bundle -v ${PWD}:/cwd -w /cwd -it ruby:2.4'
