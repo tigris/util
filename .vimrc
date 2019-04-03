@@ -160,6 +160,7 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
      map ,s    :!ispell %<cr>
      map ,r    :!%<cr>
      map ,j    mj:0,$!jq .<cr>'j
+     map ,h    mh:0,$!tidy -iqn --wrap 0 --show-warnings no<cr>'h
      map ,x    mx:0,$!xmllint --format -<cr>'x
      map ,n    :call ToggleLineNumbers()<cr>
      map ,t    :Tabularize/\(:.*\)\@<!:\zs /l0<cr>
