@@ -1,0 +1,17 @@
+#!/bin/bash -e
+set -o pipefail
+
+REPO=$1
+LATEST_SHA=$(dfresh resolve "${REPO}":latest | cut -d'@' -f2)
+
+for TAG in $(dfresh tags "${REPO}" | grep '\d' | sort -rn); do
+  SHA=$(dfresh resolve "${REPO}:${TAG}" | cut -d'@' -f2)
+  if [[ "${SHA}" == "${LATEST_SHA}" ]]; then
+    echo "${TAG}"
+    exit 0
+  fi
+done
+
+echo "No semantic tag found!"
+
+exit 1
