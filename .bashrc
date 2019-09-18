@@ -47,6 +47,7 @@ alias bera='bundle exec rubocop -a'
 alias my='mysql -u root'
 
 # Git stuff cos I'm lazier than a sloth
+alias git-cleanup-branches='for shit in `git branch | grep -v master`; do git branch -d $shit; done'
 alias gp='git pull --rebase'
 alias gpush='git push'
 alias gr='git rebase'
