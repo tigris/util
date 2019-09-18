@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker run --rm -t \
+  -e RENOVATE_TOKEN \
+  -e RENOVATE_ENDPOINT=https://git.realestate.com.au/api/v3/ \
+  -e GITHUB_COM_TOKEN \
+  --user $UID \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  renovate/renovate \
+  --binary-source=docker \
+  "$@"
