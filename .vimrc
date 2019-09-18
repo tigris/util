@@ -142,38 +142,37 @@ autocmd BufReadPost                 *          if line("'\"") > 0 && line("'\"")
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-    imap ,,    <esc>
-    imap <c-s> <c-o><c-s>
-    imap <c-s> <esc><c-s>
-    imap <c-q> <esc><c-q>
-    imap <c-x> <esc><c-x>
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-    imap <c-n> <esc><c-n>
-     map <c-n> :call ToggleNerdTree()<cr>
-     map ,2    :call TogglePaste()<cr>
-     map ,4    :call ToggleFoldmethod()<cr>
-     map ,5    :call ToggleBackground()<cr>
-     map ,6    :call ToggleHLSearch()<cr>
-     map ,7    :call ToggleSyntax()<cr>
-     map gb    :call GitBlame()<cr>
-     map gd    :!git diff %<cr>
-     map ,s    :!ispell %<cr>
-     map ,r    :!%<cr>
-     map ,j    mj:0,$!jq .<cr>'j
-     map ,h    mh:0,$!tidy -iqn --wrap 0 --show-warnings no<cr>'h
-     map ,x    mx:0,$!xmllint --format -<cr>'x
-     map ,n    :call ToggleLineNumbers()<cr>
-     map ,t    :Tabularize/\(:.*\)\@<!:\zs /l0<cr>
-     map ,T    :call ToggleShowSpecialChars()<cr>
-     map <c-s> :w<cr>
-     map <c-a> ggVG
-     map <c-q> :q<cr>
-     map <c-x> :x<cr>
-     map ,p    "+p
-     map ,y    "+y
-     map ,f    :CtrlP<cr>
-     map <space> <c-w>
-vnoremap p     <esc>:let current_reg = @"<cr>gvdi<c-r>=current_reg<cr><esc>
+inoremap <C-s>   <esc>:w<cr>a
+inoremap <C-q>   <esc>:q<cr>
+inoremap <C-x>   <esc>:wq<cr>
+inoremap <tab>   <c-r>=InsertTabWrapper()<cr>
+inoremap <C-n>   <esc>:call ToggleNerdTree()<cr>
+nnoremap <C-n>   :call ToggleNerdTree()<cr>
+nnoremap ,2      :call TogglePaste()<cr>
+nnoremap ,4      :call ToggleFoldmethod()<cr>
+nnoremap ,5      :call ToggleBackground()<cr>
+nnoremap ,6      :call ToggleHLSearch()<cr>
+nnoremap ,7      :call ToggleSyntax()<cr>
+nnoremap gb      :call GitBlame()<cr>
+nnoremap gd      :!git diff %<cr>
+nnoremap ,s      :!ispell %<cr>
+nnoremap ,c      :!open -a "Google Chrome.app" %<CR>
+nnoremap ,r      :!%<cr>
+nnoremap ,j      mj:0,$!jq .<cr>'j
+nnoremap ,h      mh:0,$!tidy -iqn --wrap 0 --show-warnings no<cr>'h
+nnoremap ,x      mx:0,$!xmllint --format -<cr>'x
+nnoremap ,n      :call ToggleLineNumbers()<cr>
+nnoremap ,t      :Tabularize/\(:.*\)\@<!:\zs /l0<cr>
+nnoremap ,T      :call ToggleShowSpecialChars()<cr>
+nnoremap <C-s>   :w<cr>
+nnoremap <C-a>   ggVG
+nnoremap <C-q>   :q<cr>
+nnoremap <C-x>   :wq<cr>
+nnoremap ,p      "+p
+nnoremap ,y      "+y
+nnoremap ,f      :CtrlP<cr>
+nnoremap <space> <C-w>
+vnoremap p       <esc>:let current_reg = @"<cr>gvdi<c-r>=current_reg<cr><esc>
 
 set encoding=utf-8
 set title
