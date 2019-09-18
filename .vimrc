@@ -24,6 +24,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'patstockwell/vim-monokai-tasty'
+Bundle 'JamshedVesuna/vim-markdown-preview'
 
 function GitBlame() range
   execute ":!git annotate " . shellescape(simplify(expand("%")), 1) . " | head -" . a:lastline . " | tail -" . (a:lastline - a:firstline + 1)
@@ -179,6 +180,10 @@ set title
 
 let g:EasyMotion_leader_key = '\'
 let g:vim_json_syntax_conceal = 0
+let vim_markdown_preview_github=1
+let vim_markdown_preview_toggle=1
+let vim_markdown_preview_browser='Google Chrome'
+let vim_markdown_preview_hotkey=',m'
 
 syntax enable
 let g:solarized_termcolors = 16
