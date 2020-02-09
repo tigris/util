@@ -65,7 +65,7 @@ alias dcu='docker-compose up --abort-on-container-exit --build'
 alias dcd='docker-compose down'
 alias dcr='docker-compose run --rm'
 
-alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+alias ack='ag'
 
 export SHORT_HOSTNAME=`hostname -s`
 if [ -f "$HOME/.bash/host/$SHORT_HOSTNAME" ]; then
@@ -87,15 +87,6 @@ if [ `which vim` ]; then
 else
   export EDITOR="vi"
 fi
-
-# rvm
-# [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-
-# # rbenv
-# if [ -d "$HOME/.rbenv" ]; then
-#   export PATH="$HOME/.rbenv/bin:$PATH"
-#   eval "$(rbenv init -)"
-# fi
 
 if [ -f "$HOME/.oldpwd" ]; then
   cd "`cat "$HOME/.oldpwd"`"
