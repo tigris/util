@@ -158,7 +158,7 @@ nnoremap gb      :call GitBlame()<cr>
 nnoremap gd      :!git diff %<cr>
 nnoremap ,s      :!ispell %<cr>
 nnoremap ,c      :!open -a "Google Chrome.app" %<CR>
-nnoremap ,r      :!%<cr>
+nnoremap ,r      :!./%<cr>
 nnoremap ,j      mj:0,$!jq .<cr>'j
 nnoremap ,h      mh:0,$!tidy -iqn --wrap 0 --show-warnings no<cr>'h
 nnoremap ,x      mx:0,$!xmllint --format -<cr>'x
@@ -182,6 +182,7 @@ let g:EasyMotion_leader_key = '\'
 let g:vim_json_syntax_conceal = 0
 let vim_markdown_preview_github=1
 let vim_markdown_preview_toggle=1
+let vim_markdown_preview_temp_file=1
 let vim_markdown_preview_browser='Google Chrome'
 let vim_markdown_preview_hotkey=',m'
 
