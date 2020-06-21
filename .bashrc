@@ -2,6 +2,8 @@ if [ -f "/etc/bash.bashrc" ]; then
   source "/etc/bash.bashrc"
 fi
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 alias private='source "$HOME/.bashrc.private"'
 
 umask 002
