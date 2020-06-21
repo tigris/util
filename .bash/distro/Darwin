@@ -4,6 +4,10 @@ if [ `which gls` ]; then
   alias ls='ls --color=auto'
 fi
 
+if [ `which gsed` ]; then
+  PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+fi
+
 if [ `which gdircolors` ]; then
   dircolors ~/.dircolors >/tmp/dircolors
   source /tmp/dircolors
