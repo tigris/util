@@ -1,2 +1,0 @@
-alias ssha='ssh -i ~/.ssh/id_rsa.rea-is-ap-southwest -l ec2-user'
-alias my='mysql -u root myworkbench_dev'
