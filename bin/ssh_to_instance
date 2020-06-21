@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -eu -o pipefail
+
+instance_id="$1"
+user="${2}"
+port="${3}"
+
+availability_zone="$(aws ec2 describe-instances --instance-ids "${instance_id}" --query "Reservations[0].Instances[0].Placement.AvailabilityZone" --output text)"
+
+aws ec2-instance-connect send-ssh-public-key \
+  --instance-id "${instance_id}" \
+  --ssh-public-key "file://${HOME}/.ssh/id_rsa.pub" \
+  --availability-zone "${availability_zone}" \
+  --instance-os-user "${user}"
+
+exec aws ssm start-session --target "${instance_id}" --document-name AWS-StartSSHSession --parameters portNumber="${port}"
