@@ -134,6 +134,7 @@ set wildmenu
 set wildmode=list
 set modeline
 set number
+set eol
 
 "autocmd BufNewFile,BufRead,BufEnter *.html.erb set filetype=html
 autocmd BufNewFile,BufRead,BufEnter *.thor     set filetype=ruby
@@ -146,6 +147,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 inoremap <C-s>   <esc>:w<cr>a
 inoremap <C-q>   <esc>:q<cr>
 inoremap <C-x>   <esc>:wq<cr>
+inoremap <C-/>   <esc>:TComment<cr>i
 inoremap <tab>   <c-r>=InsertTabWrapper()<cr>
 inoremap <C-n>   <esc>:call ToggleNerdTree()<cr>
 nnoremap <C-n>   :call ToggleNerdTree()<cr>
@@ -173,7 +175,11 @@ nnoremap ,p      "+p
 nnoremap ,y      "+y
 nnoremap ,f      :CtrlP<cr>
 nnoremap <space> <C-w>
+nnoremap <C-/>   :TComment<cr>
+vnoremap <C-/>   :TComment<cr>
 vnoremap p       <esc>:let current_reg = @"<cr>gvdi<c-r>=current_reg<cr><esc>
+
+nnoremap ,8      :%s/\(\w\)/:alphabet-white-\1:/g<cr>
 
 set encoding=utf-8
 set title
