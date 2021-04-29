@@ -20,7 +20,11 @@ export GPG_TTY=`tty`
 unset MAIL
 unset MAILCHECK
 
-alias l='ls -lA'
+if ls --color /dev/null >/dev/null 2>&1 ; then
+  alias ls='ls --color=auto'
+fi
+
+alias l='ls -lA --color=auto'
 alias c='clear'
 alias x='exit'
 
@@ -39,7 +43,6 @@ alias golf='vim ~/junk/golf'
 alias sql='vim ~/junk/dmp.sql'
 
 alias sshd='ssh doc'
-alias ssht='ssh tigris'
 
 alias be='bundle exec'
 alias bi='bundle install'
@@ -99,15 +102,23 @@ fi
 if [ -e /usr/local/opt/chruby/share/chruby/chruby.sh ]; then
   source /usr/local/opt/chruby/share/chruby/chruby.sh
 fi
+if [ -e /opt/homebrew/opt/chruby/share/chruby/chruby.sh ]; then
+  source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+fi
 
 # chruby auto switch
 if [ -e /usr/local/opt/chruby/share/chruby/auto.sh ]; then
   source /usr/local/opt/chruby/share/chruby/auto.sh
 fi
+if [ -e /opt/homebrew/opt/chruby/share/chruby/auto.sh ]; then
+  source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+fi
 
 if [ -e /etc/profile.d/chruby.sh ]; then
   source /etc/profile.d/chruby.sh
 fi
+
+export RUBY_CONFIGURE_OPTS="--disable-install-doc"
 
 # Path fixes
 if [ -z "$(echo $PATH | grep /usr/local/sbin)" ]; then
@@ -122,7 +133,20 @@ if [ -z "$(echo $PATH | grep $HOME/bin)" ]; then
   export PATH="$HOME/bin:$PATH"
 fi
 
+if [ -z "$(echo $PATH | grep ${HOME}/go/bin)" ] ; then
+  export PATH="${PATH}:${HOME}/go/bin"
+fi
+
+if [ -z "$(echo $PATH | grep /usr/local/go/bin)" ] ; then
+  export PATH="${PATH}:/usr/local/go/bin"
+fi
+export GOPATH="${HOME}/go"
+
 NPMBIN=`npm -g bin 2>/dev/null`
 if [ "x$NPMBIN" != "x" ]; then
   export PATH="$NPMBIN:$PATH"
 fi
+
+dircolors ~/.dircolors >/tmp/dircolors
+source /tmp/dircolors
+rm /tmp/dircolors

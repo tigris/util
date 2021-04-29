@@ -1,18 +1,22 @@
-if [ `which gls` ]; then
-  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-  alias ls='ls --color=auto'
+if [ -z "$(echo $PATH | grep /opt/homebrew/bin:)" ]; then
+  export PATH="/opt/homebrew/bin:${PATH}"
 fi
 
-if [ `which gsed` ]; then
-  PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+for dir in $(/bin/ls -d /opt/homebrew/opt/*/libexec/gnubin | /usr/bin/grep -v @) ; do
+  if [ -z "$(echo $PATH | grep ${dir}:)" ]; then
+    PATH="${dir}:$PATH"
+  fi
+done
+
+for dir in $(/bin/ls -d /opt/homebrew/opt/*/libexec/gnuman | /usr/bin/grep -v @) ; do
+  if [ -z "$(echo $MANPATH | grep ${dir}:)" ]; then
+    MANPATH="${dir}:$MANPATH"
+  fi
+done
+
+if [ -z "$(echo $PATH | grep 'Visual Studio Code')" ]; then
+  export PATH="${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fi
 
-if [ `which gdircolors` ]; then
-  dircolors ~/.dircolors >/tmp/dircolors
-  source /tmp/dircolors
-  rm /tmp/dircolors
-else
-  export CLICOLOR=1
-  export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-fi
+# export LDFLAGS="-L/opt/homebrew/opt/zlib/lib -L/opt/homebrew/opt/libffi/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/openssl/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/zlib/include -I/opt/homebrew/opt/libffi/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/openssl/include"
